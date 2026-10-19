@@ -1,0 +1,5 @@
+{
+  "env": {
+    "OM_CHROME": "/opt/pw-browsers/chromium"
+  }
+}
