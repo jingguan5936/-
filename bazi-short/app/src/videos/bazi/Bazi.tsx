@@ -61,7 +61,8 @@ const Inner: React.FC<{ id: number; kit: Kit }> = ({ id, kit }) => {
     grade: new GradeEffect(GRADES.day, GRADE_STRENGTH.day),
     grain: new GrainEffect({ amount: 0.025, cellPx: 1.5 }), // film grain, OFF by default (inputProps post.grain): the reference measures no grain and it quadruples the file size
   }), [camera, scene]);
-  useEffect(() => () => fx.ink.dispose(), [fx]);
+  // the crossfade layer unmounts mid-render; the composer may already have torn the pass down, so dispose defensively
+  useEffect(() => () => { try { const d = (fx.ink as unknown as { dispose?: () => void }).dispose; if (typeof d === "function") d.call(fx.ink); } catch { /* already disposed */ } }, [fx]);
   const post = useMemo(() => (
     <EffectComposer multisampling={2}>
       {on.ink ? <primitive object={fx.ink} dispose={null} /> : null}

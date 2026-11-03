@@ -214,7 +214,7 @@ export type Dof = { f: number; dur?: number; cInf: number; focus?: (f: number) =
 export const DOF: Dof[] = [
   { f: 0, cInf: 0 }, { f: 186, cInf: 10 }, { f: 237, cInf: 13 }, { f: EV.slipOpen, cInf: 14 },
   { f: 332, cInf: 0 }, { f: EV.stems - 12, dur: 28, cInf: 8 }, { f: 440, cInf: 0 },
-  { f: 511, cInf: 10 }, { f: 590, cInf: 5 }, { f: 642, cInf: 12, focus: () => [CAT_AT[0], CAT_AT[1] + 0.3, CAT_AT[2]] },
+  { f: 511, cInf: 10, focus: () => [200.6, 1.85, 1.85] }, { f: 590, cInf: 5 }, { f: 642, cInf: 12, focus: () => [CAT_AT[0], CAT_AT[1] + 0.3, CAT_AT[2]] },
   { f: 696, cInf: 10, focus: () => [24.05, D0 + 1.75, 16.0] }, { f: 757, cInf: 12 }, { f: 826, cInf: 14 },
   { f: 885, cInf: 15 }, { f: 935, cInf: 14 }, { f: 984, cInf: 0 },
   { f: 1017, cInf: 8 }, { f: 1073, cInf: 11, focus: () => [24.05, D0 + 1.75, 16.0] }, { f: 1116, cInf: 7 },
