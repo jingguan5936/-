@@ -77,3 +77,18 @@ chips → chips sort into two columns → chips fall back into the chart → end
 - 十神 for 辛 (阴金): 丙正官 丁七杀 甲正财 乙偏财 戊正印 己偏印 癸食神 壬伤官.
 - 建禄、月劫同论 (《子平真诠·论建禄月劫》); 阳刃 only for 阳干 (甲卯 丙午 戊午 庚酉 壬子).
 - The chart's day pillar was computed (JDN method, checked on 2000-01-01 戊午 and 1949-10-01 甲子).
+
+## Revision 2 · after an expert read (2026-11-03)
+
+Four bars of reading time were added (after bars 5, 13, 15 and 23; `INSERTS` in index.html and tools/score.py),
+so the film is 29 bars, 69.6 s.
+
+- 用神 note under 八字用神，专求月令: here 用神 means 月令取用, not the later 喜用神.
+- The hero's sub-line now says the book itself uses 寅月透丙 (《论用神变化》).
+- The rule card steps back (the chart scales to .82) and gains its limits: 多干并透、地支会合 → 用神变化与成败救应;
+  e.g. 辛日寅月甲丙并透 → 正财为格、正官为兼格 (paraphrased; not shown as a quote).
+- The 格 title no longer says the month "defines eight 格": 由月令取用，辨常见格局; 八正格 is labelled a later summary.
+- 建禄 / 阳刃: 另法取用.
+- 顺用 / 逆用 shows the book's own four and four (财官印食 / 杀伤枭刃), 用神之善 / 不善 instead of 善神 / 恶神,
+  and the line 当顺而顺，当逆而逆，配合得宜，皆为贵格 (《论用神》).
+- Not adopted: the reviewer's 财官印食，顺用为常；煞伤枭刃，逆用取成 — a paraphrase, so it is not shown as the book's words.

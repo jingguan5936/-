@@ -1,8 +1,8 @@
 """Builds the film's om-score (ABC) and writes it into index.html.
 
-100 BPM, 4/4, 25 bars = 60 s, D 宫 (D major pentatonic melody over diatonic chords).
+100 BPM, 4/4, 25 written bars + 4 inserted for reading time = 29 bars ≈ 69.6 s, D 宫 (D major pentatonic melody over diatonic chords).
 Motif: D E A B (1 2 5 6) on 笛子, stated in the hook, an octave-bright statement on the hero,
-driven in the montage, and the sonic logo at the end. Every voice must have exactly 25 bars.
+driven in the montage, and the sonic logo at the end. Every voice must have exactly 25 written bars.
 Run: python3 -I tools/score.py index.html
 """
 import re
@@ -99,6 +99,17 @@ voices = {
 BARS = 25
 for name, bars in voices.items():
     assert len(bars) == BARS, f'{name}: {len(bars)} bars'
+
+# Reading time added to the picture (index.html INSERTS): one more bar after bars 5, 13, 15 and 23.
+# Each repeats the bar before it, without marks, hits, fermatas or span openers/closers.
+INSERTS = [5, 13, 15, 23]
+STRIP = re.compile(r'!(mark:[^!]+|hit|fermata|(crescendo|diminuendo|rise|stop|filter|stutter)[()])!\s*')
+for name, bars in voices.items():
+    for after in sorted(INSERTS, reverse=True):
+        bars.insert(after, STRIP.sub('', bars[after - 1]).strip() or 'z8')
+BARS += len(INSERTS)
+for name, bars in voices.items():
+    assert len(bars) == BARS, f'{name}: {len(bars)} bars after inserts'
 
 lines = ['X:1', 'T:八字格局 · 怎么取格', 'M:4/4', 'L:1/8', 'Q:1/4=100', 'K:D']
 for name, bars in voices.items():

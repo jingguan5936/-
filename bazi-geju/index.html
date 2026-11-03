@@ -66,7 +66,8 @@
   .step i { font-style: normal; display: inline-flex; width: 74px; height: 74px; border-radius: 50%; align-items: center; justify-content: center;
     background: var(--ink); color: var(--ground); font-size: 44px; }
   .sub { margin-top: 18px; font-size: 34px; color: var(--muted); letter-spacing: 4px; }
-  .quote { position: absolute; left: 60px; right: 60px; top: 1176px; text-align: center; }
+  .quote { position: absolute; left: 60px; right: 60px; top: 1150px; text-align: center; }
+  .quote .s2 { margin-top: 22px; font-size: 30px; color: var(--muted); letter-spacing: 2px; }
   .quote .t { font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 74px; letter-spacing: 8px; }
   .quote .s { margin-top: 18px; font-size: 32px; color: var(--muted); letter-spacing: 6px; }
   .rel { position: absolute; top: 1192px; left: 0; right: 0; text-align: center; font-size: 42px; letter-spacing: 2px; white-space: nowrap; }
@@ -74,12 +75,14 @@
   .result { position: absolute; top: 1236px; left: 0; right: 0; text-align: center; font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 128px; letter-spacing: 12px; }
   .uline { position: absolute; left: 390px; top: 1392px; width: 300px; height: 8px; border-radius: 4px; background: var(--fire); transform-origin: 50% 50%; }
   .flip { font-size: 104px; }
-  .rulecard { position: absolute; left: 96px; right: 96px; top: 1196px; }
-  .rulecard div { font-size: 40px; line-height: 64px; display: flex; justify-content: space-between; border-bottom: 2px solid var(--line); }
+  .rulecard { position: absolute; left: 96px; right: 96px; top: 1046px; }
+  .caveat { position: absolute; left: 96px; right: 96px; top: 1236px; font-size: 32px; line-height: 1.5; }
+  .caveat .eg2 { margin-top: 8px; color: var(--muted); }
+  .rulecard div { font-size: 40px; line-height: 58px; display: flex; justify-content: space-between; border-bottom: 2px solid var(--line); }
   .rulecard b { font-weight: 900; }
 
   /* colour fields (the 八格 burst) */
-  #fields { position: absolute; inset: 0; background: var(--f-fire); clip-path: circle(0px at 430px 810px); }
+  #fields { position: absolute; inset: 0; background: var(--f-fire); clip-path: circle(0px at 450px 707px); }
   #fields .ghost { position: absolute; left: 330px; top: 330px; font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 1180px; line-height: 1; color: #fff; opacity: .09; }
   #fields .prog { position: absolute; left: 96px; top: 248px; display: flex; align-items: center; gap: 24px; font-size: 32px; letter-spacing: 6px; }
   #fields .ticks { display: flex; gap: 8px; }
@@ -95,22 +98,24 @@
 
   /* 顺用 / 逆用 */
   #shunni { position: absolute; inset: 0; opacity: 0; }
-  .colh { position: absolute; top: 300px; width: 440px; text-align: center; }
+  .colh { position: absolute; top: 290px; width: 440px; text-align: center; }
   .colh .h { font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 92px; letter-spacing: 10px; }
   .colh .d { margin-top: 6px; font-size: 32px; color: var(--muted); letter-spacing: 4px; }
-  .pill { position: absolute; width: 240px; height: 78px; margin-left: -120px; border-radius: 39px; display: flex; align-items: center; justify-content: center;
-    font-size: 44px; font-weight: 900; letter-spacing: 6px; color: #fff; opacity: 0; }
-  .eg { position: absolute; top: 1004px; width: 440px; text-align: center; font-size: 38px; line-height: 1.5; }
+  .orb { position: absolute; width: 150px; height: 150px; margin-left: -75px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 84px; color: #fff; }
+  .orb-l { position: absolute; width: 240px; margin-left: -120px; text-align: center; font-size: 26px; color: var(--muted); letter-spacing: 2px; }
+  .eg { position: absolute; top: 912px; width: 440px; text-align: center; font-size: 38px; line-height: 1.5; }
   .eg b { font-weight: 900; }
-  .src { position: absolute; left: 60px; right: 60px; top: 1150px; text-align: center; }
-  .src .t { font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 58px; line-height: 1.4; letter-spacing: 6px; }
-  .src .s { margin-top: 14px; font-size: 32px; color: var(--muted); letter-spacing: 6px; }
+  .src { position: absolute; left: 60px; right: 60px; top: 992px; text-align: center; }
+  .src .sum { font-weight: 900; font-size: 46px; letter-spacing: 4px; }
+  .src .t { margin-top: 22px; font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 44px; line-height: 1.4; letter-spacing: 2px; }
+  .src .s { margin-top: 12px; font-size: 30px; color: var(--muted); letter-spacing: 3px; }
 </style>
 </head>
 <body>
 <div id="film" data-composition-id="film" data-width="1080" data-height="1920">
   <div id="glow" class="abs" style="left:90px;top:360px;width:900px;height:900px;border-radius:50%;background:radial-gradient(closest-side,#22303e,transparent);opacity:.7"></div>
-  <audio id="om-sound" src="assets/sound.wav" data-start="0" data-duration="60" data-track-index="8" data-volume="1"></audio>
+  <audio id="om-sound" src="assets/sound.wav" data-start="0" data-duration="69.6" data-track-index="8" data-volume="1"></audio>
 
   <!-- the chart -->
   <div id="chart" class="abs" style="inset:0">
@@ -163,7 +168,7 @@
   <div class="top" id="t-s1"><div class="step"><i>1</i>看月令藏着什么</div><div class="sub">寅 = 甲（本气）丙（中气）戊（余气）</div></div>
   <div class="top" id="t-s2"><div class="step"><i>2</i>看谁透出天干</div><div class="sub">藏干在天干露面，就叫“透出”</div></div>
   <div class="top" id="t-s3"><div class="step"><i>3</i>用日主定十神</div><div class="sub">以日主辛金为“我”，看透出者与我的生克</div></div>
-  <div class="top" id="t-rule" data-om-id="取格一句话"><div class="step" style="font-family:'Noto Serif SC',serif;letter-spacing:6px" data-var-text="rule">月令藏干，透出者为格</div><div class="sub">本例：寅月透丙 → 正官格</div></div>
+  <div class="top" id="t-rule" data-om-id="取格一句话"><div class="step" style="font-family:'Noto Serif SC',serif;letter-spacing:6px" data-var-text="rule">月令藏干，透出者为格</div><div class="sub">《论用神变化》原书正以寅月透丙为例</div></div>
   <div class="top" id="t-jia"><div class="step">假如透出的是<span style="color:var(--wood)">甲</span>？</div><div class="sub">同一个寅月，换一个透出</div></div>
   <div class="top" id="t-wu"><div class="step">假如透出的是<span style="color:var(--earth)">戊</span>？</div><div class="sub">同一个寅月，再换一个</div></div>
   <div class="top" id="t-rt"><div class="step">取格的规矩</div><div class="sub">月令藏干，按这个顺序取</div></div>
@@ -175,7 +180,7 @@
   <div class="abs center serif flip" id="fl-yin" style="top:1180px;font-weight:900;color:var(--earth);opacity:0">正印格</div>
 
   <!-- bottom zone -->
-  <div class="quote" id="b-quote" data-om-id="原文引句"><div class="t" data-var-text="quote">八字用神，专求月令</div><div class="s">——《子平真诠·论用神》</div></div>
+  <div class="quote" id="b-quote" data-om-id="原文引句"><div class="t" data-var-text="quote">八字用神，专求月令</div><div class="s">——《子平真诠·论用神》</div><div class="s2" id="q-note">注：此处“用神”指月令取用，不同于后世常说的“喜用神”</div></div>
   <div class="rel" id="rel-guan"><b style="color:var(--fire)">丙火</b> 克 <b style="color:var(--metal)">辛金</b> · 一阳一阴 → 正官</div>
   <div class="rel" id="rel-cai"><b style="color:var(--metal)">辛金</b> 克 <b style="color:var(--wood)">甲木</b> · 一阴一阳 → 正财</div>
   <div class="rel" id="rel-yin"><b style="color:var(--earth)">戊土</b> 生 <b style="color:var(--metal)">辛金</b> · 一阳一阴 → 正印</div>
@@ -188,22 +193,28 @@
     <div id="ru2"><span>本气不透，中气或余气透出</span><b>取透出者</b></div>
     <div id="ru3"><span>都不透</span><b>仍取本气</b></div>
   </div>
+  <div class="caveat" id="caveat" data-om-id="取格边界"><div>以上是入门取格法。<br>多干并透、地支会合，还要再论用神变化与成败救应</div><div class="eg2">如辛日寅月甲丙并透：以正财为格，正官为兼格</div></div>
 
   <!-- 八格: colour fields -->
   <div id="fields">
     <div class="ghost" id="ghost">丙</div>
     <div class="prog" id="prog"><span id="prog-t">八正格</span><div class="ticks" id="ticks"></div></div>
-    <div class="shot title-shot" id="sh-title"><div class="big">月令十神<br>定出八格</div>
-      <div class="why">底色 = 十神的五行（以辛金日主为例）<br>克我火 · 我克木 · 生我土 · 我生水</div></div>
+    <div class="shot title-shot" id="sh-title"><div class="big">由月令取用<br>辨常见格局</div>
+      <div class="why">后世常归纳为“八正格”，另有建禄、阳刃<br>底色按辛金日主：官杀火 · 财木 · 印土 · 食伤水</div></div>
   </div>
 
   <!-- 顺用 / 逆用 -->
   <div id="shunni">
-    <div class="colh" style="left:80px"><div class="h">顺用</div><div class="d">善神 · 生之护之</div></div>
-    <div class="colh" style="left:560px"><div class="h">逆用</div><div class="d">恶神 · 制之化之</div></div>
-    <div class="eg" style="left:80px" id="eg-l">如<b>正官</b>：喜财生、喜印护</div>
-    <div class="eg" style="left:560px" id="eg-r">如<b>七杀</b>：喜食神来制</div>
-    <div class="src" id="src" data-om-id="顺逆原文"><div class="t">财官印食，顺用<br>杀伤枭刃，逆用</div><div class="s">——《子平真诠·论用神》</div></div>
+    <div class="colh" style="left:80px"><div class="h">顺用</div><div class="d">用神之善 · 生之护之</div></div>
+    <div class="colh" style="left:560px"><div class="h">逆用</div><div class="d">用神之不善 · 制之化之</div></div>
+    <div class="eg" style="left:80px" id="eg-l">如<b>官</b>：喜财生、喜印护</div>
+    <div class="eg" style="left:560px" id="eg-r">如<b>杀</b>：喜食神制伏</div>
+    <div class="src" id="src" data-om-id="顺逆原文">
+      <div class="sum">财官印食顺用 · 杀伤枭刃逆用</div>
+      <div class="t" id="src-q">当顺而顺，当逆而逆，配合得宜，皆为贵格</div>
+      <div class="s">——《子平真诠·论用神》</div>
+      <div class="s" id="src-n">善与不善指取用之法，不等于现实中的好坏</div>
+    </div>
   </div>
 </div>
 
@@ -216,52 +227,62 @@ Q:1/4=100
 K:D
 V:DZ inst=dizi role=melody gain=0.8
 !mf! z2 de a2b2 | a4 f2e2 | z8 | z8 | z8 |
-!mp! z4 B2d2 | e4 d2B2 | A4 z4 | !f! d2e2 a3b | b4 a2f2 |
-!mp! z2 a2 f2e2 | d4 e4 | z8 | z8 | z8 |
-!ff! deab d'2ba | b2a2 f2d2 | d2g2 b2a2 | e2a2 b2a2 | !ff! c'4 a2e2 |
-!mf! f4 e2d2 | B4 d4 | e8 | !p! z2 de a2b2 | !fermata!d8 |
+z8 | !mp! z4 B2d2 | e4 d2B2 | A4 z4 | !f! d2e2 a3b |
+b4 a2f2 | !mp! z2 a2 f2e2 | d4 e4 | z8 | z8 |
+z8 | z8 | z8 | !ff! deab d'2ba | b2a2 f2d2 |
+d2g2 b2a2 | e2a2 b2a2 | !ff! c'4 a2e2 | !mf! f4 e2d2 | B4 d4 |
+e8 | e8 | !p! z2 de a2b2 | !fermata!d8 |
 V:ZH inst=guzheng gain=0.6
 !mf! DAde aedA | B,FAd fdAF | !mf! DAdf afdA | B,FBd fdBF | G,DGB dBGD |
-E,B,EG BGEB, | G,DGB dBGD | A,EAc z4 | !mf! DAdf afdA | B,FBd fdBF |
-!mp! G,DGB dBGD | A,EAc ecAE | !p! B,FBd fdBF | !crescendo(! G,DGB dBGD !crescendo)! | !mf! A,/E/A/c/ e/c/A/E/ A,/E/A/c/ e/c/A/E/ |
-!ff! D/A/d/f/ a/f/d/A/ D/A/d/f/ a/f/d/A/ | B,/F/B/d/ f/d/B/F/ B,/F/B/d/ f/d/B/F/ | G,/D/G/B/ d/B/G/D/ G,/D/G/B/ d/B/G/D/ | E,/B,/E/G/ B/G/E/B,/ E,/B,/E/G/ B/G/E/B,/ | A,/E/A/c/ e/c/A/E/ A,/E/A/c/ e/c/A/E/ |
-!mf! DAdf afdA | G,DGB dBGD | A,EAc ecAE | !p! G,DGB dBGD | !fermata![DAdf]8 |
+G,DGB dBGD | E,B,EG BGEB, | G,DGB dBGD | A,EAc z4 | !mf! DAdf afdA |
+B,FBd fdBF | !mp! G,DGB dBGD | A,EAc ecAE | !p! B,FBd fdBF | !p! B,FBd fdBF |
+!crescendo(! G,DGB dBGD !crescendo)! | !mf! A,/E/A/c/ e/c/A/E/ A,/E/A/c/ e/c/A/E/ | !mf! A,/E/A/c/ e/c/A/E/ A,/E/A/c/ e/c/A/E/ | !ff! D/A/d/f/ a/f/d/A/ D/A/d/f/ a/f/d/A/ | B,/F/B/d/ f/d/B/F/ B,/F/B/d/ f/d/B/F/ |
+G,/D/G/B/ d/B/G/D/ G,/D/G/B/ d/B/G/D/ | E,/B,/E/G/ B/G/E/B,/ E,/B,/E/G/ B/G/E/B,/ | A,/E/A/c/ e/c/A/E/ A,/E/A/c/ e/c/A/E/ | !mf! DAdf afdA | G,DGB dBGD |
+A,EAc ecAE | A,EAc ecAE | !p! G,DGB dBGD | !fermata![DAdf]8 |
 V:PNO inst=piano gain=0.5
 !mp! [D,A,D]8 | [B,,F,B,]8 | [D,A,D]8 | [B,,F,B,]8 | [G,,D,G,]8 |
-[E,,B,,E,]8 | [G,,D,G,]8 | [A,,E,A,]4 z4 | !mf! [D,A,DF]4 [D,A,DF]4 | [B,,F,B,D]8 |
-!mp! [G,,D,G,B,]8 | [A,,E,A,C]8 | !p! [B,,F,B,]8 | [G,,D,G,]8 | [A,,E,A,]8 |
-!ff! [D,A,DF]4 [D,A,DF]4 | [B,,F,B,D]4 [B,,F,B,D]4 | [G,,D,G,B,]4 [G,,D,G,B,]4 | [E,,B,,E,G,]4 [E,,B,,E,G,]4 | [A,,E,A,C]4 [A,,E,A,C]4 |
-!mp! [D,A,D]8 | [G,,D,G,]8 | [A,,E,A,]8 | !p! [G,,D,G,]8 | !fermata![D,,A,,D,]8 |
+[G,,D,G,]8 | [E,,B,,E,]8 | [G,,D,G,]8 | [A,,E,A,]4 z4 | !mf! [D,A,DF]4 [D,A,DF]4 |
+[B,,F,B,D]8 | !mp! [G,,D,G,B,]8 | [A,,E,A,C]8 | !p! [B,,F,B,]8 | !p! [B,,F,B,]8 |
+[G,,D,G,]8 | [A,,E,A,]8 | [A,,E,A,]8 | !ff! [D,A,DF]4 [D,A,DF]4 | [B,,F,B,D]4 [B,,F,B,D]4 |
+[G,,D,G,B,]4 [G,,D,G,B,]4 | [E,,B,,E,G,]4 [E,,B,,E,G,]4 | [A,,E,A,C]4 [A,,E,A,C]4 | !mp! [D,A,D]8 | [G,,D,G,]8 |
+[A,,E,A,]8 | [A,,E,A,]8 | !p! [G,,D,G,]8 | !fermata![D,,A,,D,]8 |
 V:STR inst=strings gain=0.45
 z8 | z8 | z8 | z8 | z8 |
-!p! !crescendo(! [E,G,B,]8 | [G,B,D]8 | [A,CE]4 !crescendo)! z4 | !f! [F,A,D]8 | [F,B,D]8 |
-!mp! [G,B,D]8 | [E,A,C]8 | !p! [F,B,D]8 | !crescendo(! [G,B,D]8 | [E,A,C]8 !crescendo)! |
-!ff! [F,A,D]8 | [F,B,D]8 | [G,B,D]8 | [G,B,E]8 | [E,A,C]8 |
-!mp! [F,A,D]8 | [G,B,D]8 | [E,A,C]8 | !p! [G,B,D]8 | !fermata![F,A,D]8 |
+z8 | !p! !crescendo(! [E,G,B,]8 | [G,B,D]8 | [A,CE]4 !crescendo)! z4 | !f! [F,A,D]8 |
+[F,B,D]8 | !mp! [G,B,D]8 | [E,A,C]8 | !p! [F,B,D]8 | !p! [F,B,D]8 |
+!crescendo(! [G,B,D]8 | [E,A,C]8 !crescendo)! | [E,A,C]8 | !ff! [F,A,D]8 | [F,B,D]8 |
+[G,B,D]8 | [G,B,E]8 | [E,A,C]8 | !mp! [F,A,D]8 | [G,B,D]8 |
+[E,A,C]8 | [E,A,C]8 | !p! [G,B,D]8 | !fermata![F,A,D]8 |
 V:BAS inst=bass gain=0.8
 z8 | z8 | !mp! D,,8 | B,,,8 | G,,,8 |
-E,,8 | G,,,8 | A,,,4 z4 | !mf! D,,3D,,3D,,2 | B,,,3B,,,3B,,,2 |
-!mp! G,,,8 | A,,,8 | B,,,8 | G,,,8 | A,,,8 |
-!f! D,,3D,,3D,,2 | B,,,3B,,,3B,,,2 | G,,,3G,,,3G,,,2 | E,,3E,,3E,,2 | A,,,3A,,,3A,,,2 |
-!mp! D,,8 | G,,,8 | A,,,8 | !p! G,,,8 | !fermata!D,,8 |
+G,,,8 | E,,8 | G,,,8 | A,,,4 z4 | !mf! D,,3D,,3D,,2 |
+B,,,3B,,,3B,,,2 | !mp! G,,,8 | A,,,8 | B,,,8 | B,,,8 |
+G,,,8 | A,,,8 | A,,,8 | !f! D,,3D,,3D,,2 | B,,,3B,,,3B,,,2 |
+G,,,3G,,,3G,,,2 | E,,3E,,3E,,2 | A,,,3A,,,3A,,,2 | !mp! D,,8 | G,,,8 |
+A,,,8 | A,,,8 | !p! G,,,8 | !fermata!D,,8 |
 V:DR inst=drums kit=cinematic gain=0.9
 !mark:hook! !mf! =C,,4 z2 A,,A,, | =C,,4 z4 | !mark:chart! !mp! =C,,8 | z8 | =C,,4 z4 |
-!mark:steps! =C,,4 =C,,4 | =C,,4 =C,,2 =C,,2 | !crescendo(! =C,,2 D,,2 !crescendo)! z4 | !mark:hero! !hit! !mf! [=C,,^C,]4 =C,,4 | =C,,4 =C,,2 A,,A,, |
-!mark:whatif! !mp! =C,,4 z4 | =C,,4 z4 | !mark:rule! z8 | !rise(! !crescendo(! A,,2A,,2 A,,A,, A,,/A,,/A,,/A,,/ !crescendo)! !rise)! | !mark:montage! !f! [=C,,^C,]2 z2 =C,,2 D,,2 |
-!ff! =C,,2 D,,2 =C,,2 D,,2 | =C,,2 D,,2 =C,,=C,, D,,2 | =C,,2 D,,2 =C,,2 D,,2 | =C,,2 D,,2 =C,,=C,, D,,2 | !ff! =C,,2 D,,2 D,,D,, D,,/D,,/D,,/D,,/ |
-!mark:shunni! !mp! [=C,,^C,]4 z4 | =C,,4 z4 | =C,,4 z2 A,,A,, | !mark:end! !p! =C,,8 | !fermata!=C,,8 |
+=C,,4 z4 | !mark:steps! =C,,4 =C,,4 | =C,,4 =C,,2 =C,,2 | !crescendo(! =C,,2 D,,2 !crescendo)! z4 | !mark:hero! !hit! !mf! [=C,,^C,]4 =C,,4 |
+=C,,4 =C,,2 A,,A,, | !mark:whatif! !mp! =C,,4 z4 | =C,,4 z4 | !mark:rule! z8 | z8 |
+!rise(! !crescendo(! A,,2A,,2 A,,A,, A,,/A,,/A,,/A,,/ !crescendo)! !rise)! | !mark:montage! !f! [=C,,^C,]2 z2 =C,,2 D,,2 | !f! [=C,,^C,]2 z2 =C,,2 D,,2 | !ff! =C,,2 D,,2 =C,,2 D,,2 | =C,,2 D,,2 =C,,=C,, D,,2 |
+=C,,2 D,,2 =C,,2 D,,2 | =C,,2 D,,2 =C,,=C,, D,,2 | !ff! =C,,2 D,,2 D,,D,, D,,/D,,/D,,/D,,/ | !mark:shunni! !mp! [=C,,^C,]4 z4 | =C,,4 z4 |
+=C,,4 z2 A,,A,, | =C,,4 z2 A,,A,, | !mark:end! !p! =C,,8 | !fermata!=C,,8 |
 V:DR2 inst=drums kit=pop gain=0.4
 z8 | z8 | !pp! ^A2^A2 ^A2^A2 | ^A2^A2 ^A2^A2 | ^A2^A2 ^A2^A2 |
-!p! ^A^A^A^A ^A^A^A^A | ^A^A^A^A ^A^A^A^A | ^A^A^A^A z4 | !mf! ^F,,^F,,^F,,^F,, ^F,,^F,,^F,,^F,, | ^F,,^F,,^F,,^F,, ^F,,^F,,^F,,^F,, |
-!p! ^F,,2^F,,2 ^F,,2^F,,2 | ^F,,2^F,,2 ^F,,2^F,,2 | z8 | ^F,,2^F,,2 ^F,,2^F,,2 | ^F,,^F,,^F,,^F,, ^F,,^F,,^F,,^F,, |
-!f! ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ | ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ | ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ | ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ | ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ |
-z8 | z8 | z8 | z8 | z8 |
+^A2^A2 ^A2^A2 | !p! ^A^A^A^A ^A^A^A^A | ^A^A^A^A ^A^A^A^A | ^A^A^A^A z4 | !mf! ^F,,^F,,^F,,^F,, ^F,,^F,,^F,,^F,, |
+^F,,^F,,^F,,^F,, ^F,,^F,,^F,,^F,, | !p! ^F,,2^F,,2 ^F,,2^F,,2 | ^F,,2^F,,2 ^F,,2^F,,2 | z8 | z8 |
+^F,,2^F,,2 ^F,,2^F,,2 | ^F,,^F,,^F,,^F,, ^F,,^F,,^F,,^F,, | ^F,,^F,,^F,,^F,, ^F,,^F,,^F,,^F,, | !f! ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ | ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ |
+^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ | ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ | ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ ^F,,/ | z8 | z8 |
+z8 | z8 | z8 | z8 |
 </script>
 <script>
   const V = OM.vars();
   OM.music({ bpm: 100 });
   const B = (n) => OM.beat(n);           // 0.6 s; bar = 4 beats = 2.4 s
-  const bar = (b, beat = 1) => B((b - 1) * 4 + (beat - 1));
+  // bars added for reading time after the first cut: after bar 5 (the 用神 note), 13 (the rule's limits),
+  // 15 (the 格 title) and 23 (the 顺逆 note); a bar's real start shifts by the inserts before it
+  const INSERTS = [5, 13, 15, 23];
+  const bar = (b, beat = 1) => B((b - 1 + INSERTS.filter((i) => i < b).length) * 4 + (beat - 1));
   const $ = (s) => document.querySelector(s);
   const tl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
   const CELLS = ['#c-yg', '#c-yz', '#c-mg', '#c-dg', '#c-dz', '#c-hg', '#c-hz'];
@@ -277,8 +298,8 @@ z8 | z8 | z8 | z8 | z8 |
     { name: '偏印格', field: 'earth', ghost: '己', line: '辛日 · 月令透己', why: '<b>生我</b> · 阴阳同' },
     { name: '食神格', field: 'water', ghost: '癸', line: '辛日 · 月令透癸', why: '<b>我生</b> · 阴阳同' },
     { name: '伤官格', field: 'water', ghost: '壬', line: '辛日 · 月令透壬', why: '<b>我生</b> · 阴阳异' },
-    { name: '建禄格', field: 'metal', ghost: '酉', line: '辛日生酉月（辛禄在酉）', why: '月令是比劫 · <b>月劫同论</b>' },
-    { name: '阳刃格', field: 'metal', ghost: '卯', line: '阳干才有 · 如甲日卯月', why: '月令是比劫 · <b>另论</b>' },
+    { name: '建禄格', field: 'metal', ghost: '酉', line: '辛日生酉月（辛禄在酉）', why: '月令逢禄，与月劫同论 · <b>另法取用</b>' },
+    { name: '阳刃格', field: 'metal', ghost: '卯', line: '阳干才有 · 如甲日卯月', why: '月令逢刃 · <b>另法取用</b>' },
   ];
   const fields = $('#fields');
   const ticks = $('#ticks');
@@ -290,19 +311,22 @@ z8 | z8 | z8 | z8 | z8 |
     ticks.appendChild(document.createElement('i'));
   });
 
-  // 顺用 / 逆用 chips (colour = the 十神's 五行 for 辛金)
-  const PILLS = [
-    { t: '正官', c: '#bf3a26', x: 300, y: 500 }, { t: '正财', c: '#1e6b5a', x: 300, y: 594 }, { t: '偏财', c: '#1e6b5a', x: 300, y: 688 },
-    { t: '正印', c: '#b8892c', x: 300, y: 782 }, { t: '食神', c: '#2c3c63', x: 300, y: 876 },
-    { t: '七杀', c: '#bf3a26', x: 780, y: 500 }, { t: '伤官', c: '#2c3c63', x: 780, y: 594 },
-    { t: '偏印·枭', c: '#b8892c', x: 780, y: 688 }, { t: '阳刃', c: '#8f8a80', x: 780, y: 782 },
+  // 顺用 / 逆用: the four and four of 《论用神》 (colour = that 十神's 五行 for 辛金)
+  const ORBS = [
+    { t: '财', c: '#1e6b5a', x: 210, y: 490, l: '正财 · 偏财' }, { t: '官', c: '#bf3a26', x: 390, y: 490, l: '正官' },
+    { t: '印', c: '#b8892c', x: 210, y: 700, l: '正印 · 偏印' }, { t: '食', c: '#2c3c63', x: 390, y: 700, l: '食神' },
+    { t: '杀', c: '#bf3a26', x: 690, y: 490, l: '七杀' }, { t: '伤', c: '#2c3c63', x: 870, y: 490, l: '伤官' },
+    { t: '枭', c: '#b8892c', x: 690, y: 700, l: '偏印（枭神）' }, { t: '刃', c: '#8f8a80', x: 870, y: 700, l: '阳刃' },
   ];
   const sn = $('#shunni');
-  PILLS.forEach((p, i) => {
+  ORBS.forEach((p, i) => {
     const d = document.createElement('div');
-    d.className = 'pill'; d.id = 'pill-' + i; d.dataset.omId = p.t;
+    d.className = 'orb'; d.id = 'orb-' + i; d.dataset.omId = p.t;
     d.style.left = p.x + 'px'; d.style.top = p.y + 'px'; d.style.background = p.c; d.textContent = p.t;
-    sn.appendChild(d);
+    const l = document.createElement('div');
+    l.className = 'orb-l'; l.id = 'orbl-' + i;
+    l.style.left = p.x + 'px'; l.style.top = (p.y + 160) + 'px'; l.textContent = p.l;
+    sn.append(d, l);
   });
 
   // initial states (everything enters on the timeline)
@@ -348,6 +372,7 @@ z8 | z8 | z8 | z8 | z8 |
   tl.fromTo('#b-quote', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .8 }, bar(5));
   tl.fromTo('#chart', { scale: 1 }, { scale: 1.035, duration: bar(6) - bar(3, 2), ease: 'none', immediateRender: false }, bar(3, 2));
   OM.sfx('chime', bar(5) + .2, { gain: .4 });
+  tl.fromTo('#q-note', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .5 }, bar(5, 3));
 
   /* ───────── steps · bars 6–8 ───────── */
   tl.addLabel('scene:steps', bar(6));
@@ -463,15 +488,17 @@ z8 | z8 | z8 | z8 | z8 |
     tl.fromTo(id, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .45 }, bar(13, 2) + i * B(1));
     OM.sfx('tick', bar(13, 2) + i * B(1) + .08, { gain: .5, pitch: 1 + i * .1 });
   });
-  tl.fromTo('#chart', { scale: 1 }, { scale: 1.025, duration: bar(15) - bar(13) - .4, ease: 'none', immediateRender: false }, bar(13) + .4);
+  tl.to('#chart', { scale: .82, transformOrigin: '540px 240px', duration: .7, ease: 'power3.inOut' }, bar(13) + .1);   // step back: the rule and its limits need room
   // a pulse on the line that applies to this chart
-  tl.to('#ru2', { color: '#ec5a43', duration: .3 }, bar(14, 2));
+  tl.to('#ru2', { color: '#ec5a43', duration: .3 }, bar(13) + B(4));
+  tl.fromTo('#caveat', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .5 }, bar(13) + B(5));
+  OM.sfx('tick', bar(13) + B(5) + .08, { gain: .45, pitch: .9 });
 
   /* ───────── 八格 montage · bars 15–20 ───────── */
   tl.addLabel('scene:montage', bar(15));
-  tl.to('#fields', { clipPath: 'circle(1500px at 430px 810px)', duration: .35, ease: 'power2.in' }, bar(15) - .35)
+  tl.to('#fields', { clipPath: 'circle(1500px at 450px 707px)', duration: .35, ease: 'power2.in' }, bar(15) - .35)
     .set(['#ghost', '#prog'], { opacity: 0 }, bar(15))
-    .fromTo('#sh-title', { opacity: 1, scale: 1.06 }, { opacity: 1, scale: 1, duration: B(4), ease: 'none' }, bar(15))
+    .fromTo('#sh-title', { opacity: 1, scale: 1.06 }, { opacity: 1, scale: 1, duration: bar(16) - bar(15), ease: 'none' }, bar(15))
     .set('#sh-title', { opacity: 0 }, bar(16))
     .set('#ghost', { opacity: .09 }, bar(16))
     .set('#prog', { opacity: 1 }, bar(16));
@@ -495,18 +522,21 @@ z8 | z8 | z8 | z8 | z8 |
   tl.to('#fields', { clipPath: 'circle(0px at 540px 960px)', duration: .4, ease: 'power3.in' }, bar(21) - .1)
     .set('#fields', { autoAlpha: 0 }, bar(21) + .3)
     .set('#chart', { opacity: 0 }, bar(21))
-    .set(['.top', '.rulecard'], { opacity: 0 }, bar(21))
+    .set(['.top', '.rulecard', '#caveat'], { opacity: 0 }, bar(21))
     .set('#shunni', { opacity: 1 }, bar(21))
     .fromTo('.colh', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .5, stagger: .15 }, bar(21) + .3);
   OM.sfx('whoosh', bar(21), { gain: .5 });
-  PILLS.forEach((p, i) => {
+  ORBS.forEach((p, i) => {
     const t = bar(21, 3) + i * B(.5);
-    tl.fromTo('#pill-' + i, { opacity: 0, x: 540 - p.x, y: 960 - p.y, scale: .3 }, { opacity: 1, x: 0, y: 0, scale: 1, duration: .55, ease: 'expo.out' }, t);
-    OM.sfx('pop', t + .15, { note: (i % 5) + 1, gain: .4, pan: p.x < 540 ? -.4 : .4 });
+    tl.fromTo('#orb-' + i, { opacity: 0, x: 540 - p.x, y: 960 - p.y, scale: .3 }, { opacity: 1, x: 0, y: 0, scale: 1, duration: .55, ease: 'expo.out' }, t)
+      .fromTo('#orbl-' + i, { opacity: 0 }, { opacity: 1, duration: .3 }, t + .3);
+    OM.sfx('pop', t + .15, { note: (i % 4) + 1, gain: .4, pan: p.x < 540 ? -.4 : .4 });
   });
   tl.fromTo(['#eg-l', '#eg-r'], { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .5, stagger: .3 }, bar(22, 3))
-    .fromTo('#src', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .7 }, bar(23));
-  OM.sfx('chime', bar(23) + .2, { gain: .45 });
+    .fromTo('#src .sum', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .5 }, bar(23))
+    .fromTo(['#src-q', '#src .s'], { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .6, stagger: .3 }, bar(23) + B(4));
+  OM.sfx('pop', bar(23) + .1, { note: 5, gain: .4 });
+  OM.sfx('chime', bar(23) + B(4) + .2, { gain: .45 });
 
   /* ───────── end · bars 24–25 ───────── */
   tl.addLabel('scene:end', bar(24));
