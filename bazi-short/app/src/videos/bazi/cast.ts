@@ -384,7 +384,7 @@ const sceneGears = (cam: CamInfo, f: number, out: Stage) => {
 };
 const sceneProcession = (cam: CamInfo, f: number, t: number, out: Stage) => {
   DYNASTY.forEach((o, i) => {
-    const z = -4.5 + (1.4 * (f - 1700)) / FPS - 1.9 * i;
+    const z = -1.0 + (1.2 * (f - 1700)) / FPS - 1.3 * i;
     if (Math.abs(z) > 11.5) return;
     const x = i % 2 ? -0.45 : 0.45, y = deckY(z), view = viewOf(cam, x, z, 0, 1);
     const ph = q((((f - EV.march) / FPS) * 1.4 + i * 0.37) % 1, 60);
