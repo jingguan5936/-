@@ -1,0 +1,135 @@
+{
+ "FPS": 30,
+ "TOTAL": 2110,
+ "FLASH_AT": 120,
+ "EV": {
+  "slipFall": 53,
+  "slipLand": 88,
+  "slipOpen": 256,
+  "rise": [
+   331,
+   338,
+   345,
+   352
+  ],
+  "stems": 391,
+  "branches": 416,
+  "eight": 481,
+  "place": 541,
+  "bow": 570,
+  "dayBranch": 801,
+  "figs": 854,
+  "bead1": 898,
+  "bead2": 909,
+  "horse": 947,
+  "rat": 970,
+  "chong": 1001,
+  "dodge": 1031,
+  "rhyme": 1097,
+  "horseOx": 1119,
+  "goatRat": 1156,
+  "liuhe": 1278,
+  "hearts": 1302,
+  "bad": 1326,
+  "chongs": 1407,
+  "hais": 1426,
+  "xing": 1469,
+  "gearsUp": 1498,
+  "mesh": 1552,
+  "he": 1581,
+  "jam": 1627,
+  "ka1": 1665,
+  "ka2": 1671,
+  "march": 1689,
+  "catLook": 1963,
+  "catPaw": 2007,
+  "push": 2032
+ },
+ "BOWL_TIP": 2048,
+ "BOWL_HIT": 2067,
+ "SHOTS": [
+  {
+   "id": 1,
+   "a": 0,
+   "b": 120,
+   "light": "day",
+   "set": "town"
+  },
+  {
+   "id": 2,
+   "a": 120,
+   "b": 332,
+   "light": "day",
+   "set": "town"
+  },
+  {
+   "id": 3,
+   "a": 332,
+   "b": 515,
+   "light": "day",
+   "set": "town"
+  },
+  {
+   "id": 4,
+   "a": 515,
+   "b": 700,
+   "light": "day",
+   "set": "hall"
+  },
+  {
+   "id": 5,
+   "a": 700,
+   "b": 885,
+   "light": "day",
+   "set": "town"
+  },
+  {
+   "id": 6,
+   "a": 885,
+   "b": 1022,
+   "light": "day",
+   "set": "town"
+  },
+  {
+   "id": 7,
+   "a": 1022,
+   "b": 1200,
+   "light": "golden",
+   "set": "town"
+  },
+  {
+   "id": 8,
+   "a": 1200,
+   "b": 1495,
+   "light": "golden",
+   "set": "town"
+  },
+  {
+   "id": 9,
+   "a": 1495,
+   "b": 1700,
+   "light": "golden",
+   "set": "town"
+  },
+  {
+   "id": 10,
+   "a": 1700,
+   "b": 1850,
+   "light": "golden",
+   "set": "town"
+  },
+  {
+   "id": 11,
+   "a": 1850,
+   "b": 2110,
+   "light": "day",
+   "set": "hall"
+  }
+ ],
+ "XFADE": {
+  "4": 8,
+  "7": 10,
+  "10": 8,
+  "11": 10
+ }
+}
