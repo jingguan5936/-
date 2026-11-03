@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>A · 命盘机关</title>
+<script src="../vendor/gsap.min.js"></script>
+<script src="../vendor/om.js"></script>
+<link rel="stylesheet" href="../assets/fonts/noto-serif-sc.css">
+<style>
+@font-face { font-family: "Noto Sans SC"; src: url("../assets/fonts/NotoSansSC-500.woff") format("woff"); font-weight: 500; }
+@font-face { font-family: "Noto Sans SC"; src: url("../assets/fonts/NotoSansSC-900.woff") format("woff"); font-weight: 900; }
+:root {
+  --ground: #0d1116; --lift: #19212b; --cell: #161c24; --line: #2a3340;
+  --ink: #eef0f3; --muted: #8c96a4;
+  --wood: #4fae74; --fire: #ec5a43; --earth: #d0a64c; --metal: #e3ddd0; --water: #4f8ee0;
+}
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; }
+#film { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: var(--ink);
+  background: radial-gradient(900px 900px at 50% 38%, var(--lift), var(--ground) 70%); font-family: "Noto Sans SC", sans-serif; font-weight: 500; }
+.kicker { position: absolute; top: 236px; left: 0; right: 0; text-align: center; font-size: 28px; letter-spacing: 10px; color: var(--muted); }
+.q { position: absolute; top: 286px; left: 0; right: 0; text-align: center; font-size: 74px; line-height: 1.22; font-weight: 900; letter-spacing: 2px; }
+.q em { font-style: normal; color: var(--wood); }
+.col-h { position: absolute; top: 480px; width: 180px; text-align: center; font-size: 28px; letter-spacing: 6px; color: var(--muted); }
+.cell { position: absolute; width: 180px; height: 180px; border-radius: 22px; background: var(--cell); box-shadow: inset 0 0 0 2px var(--line);
+  display: flex; align-items: center; justify-content: center; font-family: "Noto Serif SC", serif; font-weight: 700; font-size: 124px; line-height: 1; }
+.cell.dim { opacity: .42; }
+.cell.ling { box-shadow: inset 0 0 0 4px var(--wood), 0 0 60px #4fae7440; }
+.cell.zhu  { box-shadow: inset 0 0 0 4px var(--metal), 0 0 50px #e3ddd030; }
+.cell.tou  { box-shadow: inset 0 0 0 4px var(--fire), 0 0 60px #ec5a4350; }
+.tag { position: absolute; font-size: 26px; letter-spacing: 4px; padding: 6px 14px; border-radius: 999px; }
+.chip { position: absolute; width: 128px; height: 128px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-family: "Noto Serif SC", serif; font-weight: 700; font-size: 78px; background: var(--cell); box-shadow: inset 0 0 0 2px var(--line); }
+.chip.on { box-shadow: inset 0 0 0 4px var(--fire), 0 0 50px #ec5a4366; background: #2a1916; }
+.chip-l { position: absolute; width: 160px; text-align: center; font-size: 26px; color: var(--muted); letter-spacing: 3px; }
+.rel { position: absolute; top: 1176px; left: 0; right: 0; text-align: center; font-size: 40px; letter-spacing: 2px; }
+.rel b { font-weight: 900; }
+.result { position: absolute; top: 1238px; left: 0; right: 0; text-align: center; font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 132px; letter-spacing: 12px; }
+.result::after { content: ""; position: absolute; left: 50%; bottom: -14px; width: 300px; height: 8px; margin-left: -150px; border-radius: 4px; background: var(--fire); }
+svg { position: absolute; inset: 0; }
+</style>
+</head>
+<body>
+<div id="film" data-composition-id="a" data-width="1080" data-height="1920">
+  <svg width="1080" height="1920" viewBox="0 0 1080 1920" fill="none">
+    <!-- 寅 opens into its three hidden stems -->
+    <path d="M430 908 C430 960 250 960 250 1000" stroke="#4fae74" stroke-width="3" opacity=".55"/>
+    <path d="M430 908 L430 1000" stroke="#4fae74" stroke-width="3" opacity=".55"/>
+    <path d="M430 908 C430 960 610 960 610 1000" stroke="#4fae74" stroke-width="3" opacity=".55"/>
+    <!-- the middle stem rises out: 透出 -->
+    <path d="M364 1064 C322 1064 320 1030 320 990 L320 640 C320 612 324 600 334 600" stroke="#ec5a43" stroke-width="4" stroke-dasharray="14 12"/>
+    <path d="M322 590 L336 600 L322 610" stroke="#ec5a43" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- 丙 克 辛 -->
+    <path d="M524 600 L548 600" stroke="#ec5a43" stroke-width="5" stroke-linecap="round"/>
+    <path d="M540 590 L552 600 L540 610" stroke="#ec5a43" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  <div class="kicker">八字格局 · 怎么取格</div>
+  <div class="q">同一个<em>寅</em>月<br>格局为什么不同？</div>
+
+  <div class="col-h" style="left:120px">年柱</div>
+  <div class="col-h" style="left:340px">月柱</div>
+  <div class="col-h" style="left:560px">日柱</div>
+  <div class="col-h" style="left:780px">时柱</div>
+
+  <div class="cell dim" style="left:120px;top:520px;color:var(--earth)">己</div>
+  <div class="cell tou" style="left:340px;top:520px;color:var(--fire)">丙</div>
+  <div class="cell zhu" style="left:560px;top:520px;color:var(--metal)">辛</div>
+  <div class="cell dim" style="left:780px;top:520px;color:var(--earth)">己</div>
+  <div class="cell dim" style="left:120px;top:720px;color:var(--fire)">巳</div>
+  <div class="cell ling" style="left:340px;top:720px;color:var(--wood)">寅</div>
+  <div class="cell dim" style="left:560px;top:720px;color:var(--water)">亥</div>
+  <div class="cell dim" style="left:780px;top:720px;color:var(--earth)">丑</div>
+
+  <div class="tag" style="left:604px;top:466px;color:#0d1116;background:var(--metal)">日主</div>
+  <div class="tag" style="left:392px;top:910px;color:#0d1116;background:var(--wood)">月令</div>
+
+  <div class="chip" style="left:186px;top:1000px;color:var(--wood)">甲</div>
+  <div class="chip on" style="left:366px;top:1000px;color:var(--fire)">丙</div>
+  <div class="chip" style="left:546px;top:1000px;color:var(--earth)">戊</div>
+  <div class="chip-l" style="left:170px;top:1136px">本气·未透</div>
+  <div class="chip-l" style="left:350px;top:1136px;color:var(--fire)">中气·透出</div>
+  <div class="chip-l" style="left:530px;top:1136px">余气·未透</div>
+
+  <div class="rel" style="top:1190px"><b style="color:var(--fire)">丙火</b> 克 <b style="color:var(--metal)">辛金</b> · 一阳一阴</div>
+  <div class="result" style="top:1250px">正官格</div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.addLabel('scene:key', 0).to({}, { duration: 1 });
+  window.__timelines['a'] = tl;
+</script>
+</body>
+</html>

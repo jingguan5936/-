@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>B · 五行色场</title>
+<script src="../vendor/gsap.min.js"></script>
+<script src="../vendor/om.js"></script>
+<link rel="stylesheet" href="../assets/fonts/noto-serif-sc.css">
+<style>
+@font-face { font-family: "Noto Sans SC"; src: url("../assets/fonts/NotoSansSC-500.woff") format("woff"); font-weight: 500; }
+@font-face { font-family: "Noto Sans SC"; src: url("../assets/fonts/NotoSansSC-900.woff") format("woff"); font-weight: 900; }
+:root { --fire: #bf3a26; --wood: #1e6b5a; --earth: #d8a23a; --water: #182033; --metal: #ece7dc; --white: #ffffff; }
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; }
+#film { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: var(--white);
+  background: radial-gradient(1200px 1100px at 30% 35%, #277c69, var(--wood) 60%, #175548); font-family: "Noto Sans SC", sans-serif; font-weight: 500; }
+.ghost { position: absolute; left: 330px; top: 300px; font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 1180px; line-height: 1; color: #ffffff; opacity: .08; }
+.prog { position: absolute; left: 96px; top: 240px; display: flex; align-items: center; gap: 26px; font-size: 30px; letter-spacing: 6px; }
+.ticks { display: flex; gap: 10px; }
+.ticks i { display: block; width: 46px; height: 8px; border-radius: 4px; background: #ffffff40; }
+.ticks i.on { background: #fff; }
+.formula { position: absolute; left: 96px; top: 470px; font-size: 54px; letter-spacing: 6px; font-weight: 500; }
+.formula b { font-weight: 900; }
+.big { position: absolute; left: 82px; top: 560px; font-size: 292px; line-height: 1.08; font-weight: 900; letter-spacing: -6px; }
+.rule { position: absolute; left: 96px; top: 912px; width: 320px; height: 10px; background: #fff; }
+.why { position: absolute; left: 96px; top: 968px; font-size: 50px; line-height: 1.5; }
+.pill { position: absolute; left: 96px; top: 1080px; display: flex; align-items: center; gap: 22px; font-size: 38px; }
+.pill span { padding: 8px 22px; border: 3px solid #fff; border-radius: 999px; font-weight: 900; letter-spacing: 4px; }
+.cang { position: absolute; left: 96px; top: 1214px; display: flex; align-items: center; gap: 22px; font-size: 40px; letter-spacing: 4px; }
+.cang .c { width: 104px; height: 104px; border-radius: 50%; border: 3px solid #ffffffa0; display: flex; align-items: center; justify-content: center;
+  font-family: "Noto Serif SC", serif; font-weight: 700; font-size: 60px; }
+.cang .c.on { background: #fff; color: var(--wood); border-color: #fff; }
+.next { position: absolute; right: 0; top: 1214px; width: 150px; height: 104px; background: var(--fire); border-radius: 52px 0 0 52px; }
+</style>
+</head>
+<body>
+<div id="film" data-composition-id="b" data-width="1080" data-height="1920">
+  <div class="ghost">甲</div>
+  <div class="prog">八字八格 <span>03 / 08</span>
+    <div class="ticks"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div></div>
+  <div class="formula">辛日 · 寅月 · <b>透甲</b></div>
+  <div class="big">正财格</div>
+  <div class="rule"></div>
+  <div class="why">辛金克甲木，一阴一阳</div>
+  <div class="pill"><span>顺用</span>喜食生财 · 喜官护财</div>
+  <div class="cang">寅藏 <div class="c on">甲</div><div class="c">丙</div><div class="c">戊</div></div>
+  <div class="next"></div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.addLabel('scene:key', 0).to({}, { duration: 1 });
+  window.__timelines['b'] = tl;
+</script>
+</body>
+</html>
