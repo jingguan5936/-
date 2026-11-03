@@ -1,0 +1,29 @@
+{
+  "name": "bazi-short",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "tsc": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@react-three/fiber": "8.17.10",
+    "@react-three/postprocessing": "2.19.1",
+    "@remotion/cli": "4.0.540",
+    "@remotion/three": "4.0.540",
+    "postprocessing": "6.36.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.540",
+    "three": "0.167.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "@types/three": "0.167.2",
+    "typescript": "5.6.3"
+  },
+  "overrides": {
+    "postprocessing": "6.36.0",
+    "three": "0.167.1"
+  }
+}
