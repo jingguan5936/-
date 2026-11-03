@@ -975,7 +975,7 @@ const animalHead = (p: Pen, k: Animal, H: Blob, cx: number, hc: number, light: n
   // ---- behind the head ----
   if (k === "rat") for (const s of [-1, 1]) p.ell(cx + s * 0.42 * W, crown + 0.12 * HH, 0.24 * W, 0.22 * W, fur, ow), p.ell(cx + s * 0.42 * W, crown + 0.13 * HH, 0.14 * W, 0.13 * W, "#f1a7b0", 0);
   if (k === "rabbit") for (const s of [-1, 1]) ear(s, 0.11 * W, 0.62 * HH, 8);
-  if (k === "horse") { for (const s of [-1, 1]) ear(s, 0.08 * W, 0.3 * HH, 16, "#d9cfc0"); p.ell(cx, crown + 0.02 * HH, 0.16 * W, 0.14 * HH, "#8d8a93", ow); }
+  if (k === "horse") { for (const s of [-1, 1]) ear(s, 0.08 * W, 0.34 * HH, 14, "#d9cfc0", -0.04 * HH); p.ell(cx + 0.36 * W, hc - 0.1 * HH, 0.12 * W, 0.34 * HH, "#6d6a78", ow, 0, 360, 10); }
   if (k === "ox") { for (const s of [-1, 1]) { horn(s, "#efe2c0", 0); p.ell(cx + s * 0.5 * W, hc - 0.18 * HH, 0.13 * W, 0.07 * HH, fur, ow, 0, 360, s * 20); } }
   if (k === "goat") for (const s of [-1, 1]) horn(s, "#a8875f", 1);
   if (k === "dragon") { for (const s of [-1, 1]) { horn(s, "#e8c45a", 0.3); p.line([[cx + s * 0.45 * W, crown + 0.02 * HH], [cx + s * 0.62 * W, crown - 0.06 * HH]], "#e8c45a", 5 * u); } }
@@ -995,9 +995,10 @@ const animalHead = (p: Pen, k: Animal, H: Blob, cx: number, hc: number, light: n
   if (k === "dog") for (const s of [-1, 1]) p.ell(cx + s * 0.47 * W, hc - 0.1 * HH, 0.13 * W, 0.27 * HH, "#9a6a3c", ow, 0, 360, s * -12);
   // muzzle / beak / snout, then the shared face (eyes + mouth)
   const mx = cx + 8 * u * facing, mz = MUZ[k];
-  if (mz) p.ell(mx, hc + 0.2 * HH, (k === "horse" || k === "ox" ? 0.3 : 0.24) * W, (k === "horse" ? 0.2 : 0.16) * HH, mz, 2.4 * u);
+  if (k === "horse") { p.ell(mx, hc + 0.3 * HH, 0.27 * W, 0.27 * HH, mz!, 2.4 * u); p.poly([[cx - 0.2 * W, crown + 0.02 * HH], [cx + 0.16 * W, crown], [cx + 0.06 * W, crown + 0.2 * HH], [cx - 0.04 * W, crown + 0.12 * HH], [cx - 0.14 * W, crown + 0.22 * HH]], "#6d6a78", 2.4 * u); }
+  else if (mz) p.ell(mx, hc + 0.2 * HH, (k === "ox" ? 0.3 : 0.24) * W, 0.16 * HH, mz, 2.4 * u);
   if (k === "pig") { p.ell(mx, hc + 0.18 * HH, 0.16 * W, 0.11 * HH, "#f7a9a5", 3 * u); for (const s of [-1, 1]) p.ell(mx + s * 5 * u, hc + 0.18 * HH, 2.2 * u, 3.4 * u, INK, 0); }
-  if (k === "ox" || k === "horse") for (const s of [-1, 1]) p.ell(mx + s * 9 * u, hc + 0.16 * HH, 2.4 * u, 3.4 * u, INK, 0);
+  if (k === "ox" || k === "horse") for (const s of [-1, 1]) p.ell(mx + s * 9 * u, hc + (k === "horse" ? 0.36 : 0.16) * HH, 2.4 * u, 3.4 * u, INK, 0);
   if (k === "ox") p.arc(mx, hc + 0.27 * HH, 8 * u, 6 * u, 20, 160, 3 * u, "#e8c45a");
   if (k === "rat" || k === "dog" || k === "tiger" || k === "rabbit") p.ell(mx, hc + 0.12 * HH, 5 * u, 3.6 * u, k === "rat" || k === "rabbit" ? "#e88a96" : INK, 1.5 * u);
   if (k === "rat" || k === "tiger" || k === "dragon") for (const s of [-1, 1]) for (const dy of [-3, 3]) p.stroke([[mx + s * 12 * u, hc + 0.16 * HH + dy * u], [mx + s * 34 * u, hc + 0.13 * HH + dy * 2 * u]], 1.6 * u);
@@ -1083,9 +1084,9 @@ export const fxHeart = (p: Pen, col = "#e2353c") => {
 export const fxBolt = (p: Pen, t: number, col = "#ffd84a", seed = 1) => {
   const pts: P2[] = [];
   const n = 9;
-  for (let i = 0; i <= n; i++) { const x = 20 + (960 * i) / n; if (x > 20 + 960 * t + 1) break; pts.push([x, 100 + (i % 2 ? -1 : 1) * (38 + 20 * rnd(seed, i)) * (i === 0 || i === n ? 0 : 1)]); }
+  for (let i = 0; i <= n; i++) { const x = 20 + (960 * i) / n; if (x > 20 + 960 * t + 1) break; pts.push([x, 100 + (i % 2 ? -1 : 1) * (24 + 14 * rnd(seed, i)) * (i === 0 || i === n ? 0 : 1)]); }
   if (pts.length < 2) return;
-  p.line(pts, col, 22);
+  p.line(pts, col, 13);
 };
 /** jagged crack line (500 x 500), opening with t */
 export const fxCrack = (p: Pen, t: number) => {
@@ -1095,8 +1096,8 @@ export const fxCrack = (p: Pen, t: number) => {
 };
 /** dark storm cloud with rain streaks (600 x 400), lightning flicker on k */
 export const fxStorm = (p: Pen, flash: number) => {
-  for (const [x, y, r] of [[170, 150, 90], [280, 110, 115], [400, 140, 100], [480, 180, 70], [300, 190, 120]] as const) p.ell(x, y, r, r * 0.75, "#4a4658", 10);
-  p.ell(300, 215, 240, 50, "#4a4658", 10);
+  for (const [x, y, r] of [[170, 150, 90], [280, 110, 115], [400, 140, 100], [480, 180, 70], [300, 190, 120]] as const) p.ell(x, y, r, r * 0.75, "#6a6480", 10);
+  p.ell(300, 215, 240, 50, "#6a6480", 10);
   for (let i = 0; i < 9; i++) p.stroke([[110 + i * 45, 270], [95 + i * 45, 330 + (i % 3) * 22]], 7, "#7d8aa8");
   if (flash > 0.5) p.line([[300, 230], [270, 300], [310, 300], [262, 392]], "#fff3b0", 16);
 };

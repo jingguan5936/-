@@ -255,7 +255,7 @@ const sceneHook = (cam: CamInfo, f: number, t: number, out: Stage) => {
   dust(out, f, EV.slipLand, 14, 0, deckY(0) + 0.5, 0, 3.4, "235,225,205");
 };
 const sceneMatchmaker = (cam: CamInfo, f: number, t: number, out: Stage) => {
-  if (f > EV.slipOpen - 2) return;
+  if (f >= EV.slipOpen) return;
   const z = Math.min(3.0, -1.0 + 0.063 * (f - 186)), walking = z < 3.0;
   const ph = q((((f - 186) / FPS) * 2.0) % 1, 60);
   front(cam, W(5, MATCHMAKER, "mm"), 0.15, deckY(z), z, { mode: walking ? "stroll" : "stand", phase: ph, expr: f > 236 ? "grin" : "smile", prop: "slip", blink: lidAt(t, 5), seed: 6 }, 1, out);
@@ -263,16 +263,16 @@ const sceneMatchmaker = (cam: CamInfo, f: number, t: number, out: Stage) => {
 const sceneHall = (id: number, cam: CamInfo, f: number, t: number, out: Stage) => {
   if (id === 4) {
     const placed = f >= EV.place, bowK = smooth((f - EV.bow) / 6) * (1 - smooth((f - EV.bow - 26) / 8));
-    if (f < 590) front(cam, W(10, FATHER, "father"), 200.95, 0, 1.95, { mode: "stand", facing: -1, expr: "stern", prop: placed ? null : "slip", tilt: -14 * bowK, blink: lidAt(t, 10), seed: 8 }, 1, out);
+    if (f < 590) front(cam, W(10, FATHER, "father"), 200.6, 0, 1.85, { mode: "stand", facing: -1, expr: "stern", prop: placed ? null : "slip", tilt: -14 * bowK, blink: lidAt(t, 10), seed: 8 }, 1, out);
     else if (f < 642) {
       front(cam, W(10, FATHER, "father"), 200.1, 0, 0.9, { mode: "stand", expr: "nervous", look: 1, blink: lidAt(t, 10), seed: 8 }, 1, out);
       const xm = 199.6 + 0.55 * clamp01((f - 590) / 50), ph = q((((f - 590) / FPS) * 1.4) % 1, 60);
       front(cam, W(11, MOTHER, "mother"), xm, 0.04 * Math.max(0, Math.sin(ph * Math.PI * 4)), 0.4, { mode: "stroll", phase: ph, lift: 30, expr: "nervous", blink: lidAt(t, 11), seed: 9 }, 1, out);
-    } else front(cam, W(10, FATHER, "father"), 198.6, 0, 1.25, { mode: "stand", expr: "stern", look: 1, blink: lidAt(t, 10), seed: 8 }, 1, out);
+    } else front(cam, W(10, FATHER, "father"), 198.35, 0, 1.0, { mode: "stand", expr: "stern", look: 1, blink: lidAt(t, 10), seed: 8 }, 1, out);
   } else {
     if (f < 1882) {
-      front(cam, W(10, FATHER, "father"), 199.35, 0, 1.2, { mode: "stand", expr: "neutral", blink: lidAt(t, 10), seed: 8 }, 1, out);
-      front(cam, W(11, MOTHER, "mother"), 200.25, 0, 1.0, { mode: "stand", expr: "smile_closed", blink: lidAt(t, 11), seed: 9 }, 1, out);
+      front(cam, W(10, FATHER, "father"), 198.95, 0, 1.0, { mode: "stand", expr: "neutral", blink: lidAt(t, 10), seed: 8 }, 1, out);
+      front(cam, W(11, MOTHER, "mother"), 199.5, 0, 1.45, { mode: "stand", expr: "smile_closed", blink: lidAt(t, 11), seed: 9 }, 1, out);
     }
   }
   // the cat on the cupboard
@@ -299,7 +299,7 @@ const sceneHall = (id: number, cam: CamInfo, f: number, t: number, out: Stage) =
 const teller = (cam: CamInfo, out: Stage, t: number, fo: FrontOpts) =>
   front(cam, W(30, TELLER, "teller"), 24.0, D0, 16.0, { mode: "stand", blink: lidAt(t, 30), seed: 12, ...fo }, 1, out);
 const figurines = (cam: CamInfo, out: Stage, f: number, t: number) => {
-  const sc = 0.17, pH = pop(f, EV.figs, 9), pR = pop(f, EV.figs + 4, 9);
+  const sc = 0.24, pH = pop(f, EV.figs, 9), pR = pop(f, EV.figs + 4, 9);
   const hopH = f >= EV.horse && f < EV.horse + 8 ? 0.05 * Math.sin(((f - EV.horse) / 8) * Math.PI) : 0;
   const hopR = f >= EV.rat && f < EV.rat + 8 ? 0.05 * Math.sin(((f - EV.rat) / 8) * Math.PI) : 0;
   const glare = f >= EV.chong - 30;
@@ -355,9 +355,9 @@ const sceneRing = (cam: CamInfo, f: number, t: number, out: Stage) => {
   const waist = (i: number): V3 => { const [x, y, z] = ringPos(i); return [x, y + 1.15, z]; };
   if (f >= EV.liuhe && f < EV.bad) LIUHE.forEach(([a, b], n) => {
     const u = q(clamp01((f - EV.liuhe - n * 3) / 12), 20);
-    if (u > 0) span(out, cam, `thread${u}`, 1000, 200, (p) => { const pts: [number, number][] = []; for (let i = 0; i <= 20 * u; i++) { const s = i / 20; pts.push([20 + 960 * s, 70 + 70 * Math.sin(Math.PI * s)]); } if (pts.length > 1) p.line(pts, "#e2353c", 16); }, waist(a), waist(b), 0.2);
+    if (u > 0) span(out, cam, `thread${u}`, 1000, 200, (p) => { const pts: [number, number][] = []; for (let i = 0; i <= 20 * u; i++) { const s = i / 20; pts.push([20 + 960 * s, 70 + 70 * Math.sin(Math.PI * s)]); } if (pts.length > 1) p.line(pts, "#e2353c", 8); }, waist(a), waist(b), 0.12);
     const hp = pop(f, EV.hearts + n * 2, 8);
-    if (hp > 0.01) { const A = waist(a), B = waist(b); out.fx.push({ key: "heart", cw: 300, ch: 300, draw: (p) => fxHeart(p), x: (A[0] + B[0]) / 2, y: (A[1] + B[1]) / 2 + 0.9, z: (A[2] + B[2]) / 2, w: 0.7 * hp, h: 0.7 * hp }); }
+    if (hp > 0.01) { const A = waist(a), B = waist(b); out.fx.push({ key: "heart", cw: 300, ch: 300, draw: (p) => fxHeart(p), x: (A[0] + B[0]) / 2, y: (A[1] + B[1]) / 2 + 0.9, z: (A[2] + B[2]) / 2, w: 0.85 * hp, h: 0.85 * hp }); }
   });
   if (hit) CHONG.forEach(([a, b], n) => {
     const u = q(clamp01((f - EV.chongs - n) / 6), 20);
@@ -369,7 +369,7 @@ const sceneRing = (cam: CamInfo, f: number, t: number, out: Stage) => {
   });
   if (xing) {
     const k = pop(f, EV.xing - 6, 10), fl = (f - EV.xing) % 14 < 3 ? 1 : 0;
-    out.fx.push({ key: `storm${fl}`, cw: 600, ch: 400, draw: (p) => fxStorm(p, fl), x: SQ[0], y: D0 + 4.6, z: SQ[2], w: 9.5 * k, h: 6.3 * k });
+    out.fx.push({ key: `storm${fl}`, cw: 600, ch: 400, draw: (p) => fxStorm(p, fl), x: SQ[0], y: D0 + 4.3, z: SQ[2], w: 6.2 * k, h: 4.1 * k });
   }
 };
 const sceneGears = (cam: CamInfo, f: number, out: Stage) => {
@@ -383,7 +383,7 @@ const sceneGears = (cam: CamInfo, f: number, out: Stage) => {
 };
 const sceneProcession = (cam: CamInfo, f: number, t: number, out: Stage) => {
   DYNASTY.forEach((o, i) => {
-    const z = -10.5 + (1.15 * (f - EV.march)) / FPS - 2.6 * i;
+    const z = -4.5 + (1.4 * (f - 1700)) / FPS - 1.9 * i;
     if (Math.abs(z) > 11.5) return;
     const x = i % 2 ? -0.45 : 0.45, y = deckY(z), view = viewOf(cam, x, z, 0, 1);
     const ph = q((((f - EV.march) / FPS) * 1.4 + i * 0.37) % 1, 60);

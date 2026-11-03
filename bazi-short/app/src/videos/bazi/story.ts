@@ -24,7 +24,7 @@ export const PILLAR_X = [-2.4, -0.8, 0.8, 2.4].map((d) => SQ[0] + d);
 export const PILLAR_H = 3.6;
 export const STALL: V3 = [24, D0, 15.4]; // table centre; the teller stands 0.6 m behind it
 export const ABACUS: V3 = [24.62, D0 + 0.86, 15.3];
-export const SLIPS: [V3, V3] = [[23.72, D0 + 0.865, 15.25], [24.12, D0 + 0.865, 15.25]];
+export const SLIPS: [V3, V3] = [[23.77, D0 + 0.865, 15.25], [24.09, D0 + 0.865, 15.25]];
 /** the ancestral hall (a separate set): floor y = 0, back wall at z = 3, the lens looks +z (screen right = -x) */
 export const RM: V3 = [200, 0, 0];
 export const ALTAR: V3 = [200, 0, 2.62];
@@ -32,8 +32,8 @@ export const CUP = { x0: 196.4, x1: 198.0, top: 1.9, z: 2.48 };
 export const CAT_AT: V3 = [197.15, CUP.top, 2.5];
 export const BOWL0: V3 = [197.72, CUP.top, 2.45];
 /** zodiac ring around the square centre (子 at the far side, clockwise seen from above) */
-export const RING_R = 5.0;
-export const ringPos = (i: number): V3 => { const a = Math.PI / 2 - (i * Math.PI) / 6 + Math.PI / 12; return [SQ[0] + RING_R * Math.cos(a), D0, SQ[2] + RING_R * Math.sin(a) * 0.85]; };
+export const RING_R = 3.6;
+export const ringPos = (i: number): V3 => { const a = Math.PI / 2 - (i * Math.PI) / 6 + Math.PI / 12; return [SQ[0] + RING_R * 0.72 * Math.cos(a), D0, SQ[2] + RING_R * Math.sin(a)]; }; // oval, long axis along the view (vertical frame)
 export const LIUHE: [number, number][] = [[0, 1], [2, 11], [3, 10], [4, 9], [5, 8], [6, 7]];
 export const CHONG: [number, number][] = [[0, 6], [1, 7], [2, 8], [3, 9], [4, 10], [5, 11]];
 export const HAI: [number, number][] = [[0, 7], [1, 6], [2, 5], [3, 4], [8, 11], [9, 10]];
@@ -69,15 +69,15 @@ export type ShotDef = { id: number; a: number; b: number; light: Light; set: Set
 export const SHOTS: ShotDef[] = [
   { id: 1, a: 0, b: 120, light: "day", set: "town", sunAz: 110, sunEl: 50 },     // hook: the slip falls between the pair
   { id: 2, a: 120, b: 332, light: "day", set: "town", sunAz: 140, sunEl: 45 },                          // Qing water town, the matchmaker, the slip
-  { id: 3, a: 332, b: 515, light: "day", set: "town", sunAz: 60 },               // four pillars, eight characters
-  { id: 4, a: 515, b: 700, light: "day", set: "hall", sunAz: 55, sunEl: 55 },    // ancestral altar, three to five days
-  { id: 5, a: 700, b: 885, light: "day", set: "town", sunAz: 70 },               // the fortune teller
-  { id: 6, a: 885, b: 1022, light: "day", set: "town", sunAz: 70 },              // abacus, horse vs rat, the clash
-  { id: 7, a: 1022, b: 1200, light: "golden", set: "town" },                     // the rhyme
-  { id: 8, a: 1200, b: 1495, light: "golden", set: "town", sunAz: 20, sunEl: 12 }, // zodiac ring
-  { id: 9, a: 1495, b: 1700, light: "golden", set: "town", sunAz: 25, sunEl: 10 }, // gears
+  { id: 3, a: 332, b: 515, light: "day", set: "town", sunAz: 145, sunEl: 42 },               // four pillars, eight characters
+  { id: 4, a: 515, b: 700, light: "day", set: "hall", sunAz: 155, sunEl: 50 },    // ancestral altar, three to five days
+  { id: 5, a: 700, b: 885, light: "day", set: "town", sunAz: 145, sunEl: 45 },               // the fortune teller
+  { id: 6, a: 885, b: 1022, light: "day", set: "town", sunAz: 145, sunEl: 45 },              // abacus, horse vs rat, the clash
+  { id: 7, a: 1022, b: 1200, light: "golden", set: "town", sunAz: 135, sunEl: 14 },                     // the rhyme
+  { id: 8, a: 1200, b: 1495, light: "golden", set: "town", sunAz: 140, sunEl: 16 }, // zodiac ring
+  { id: 9, a: 1495, b: 1700, light: "golden", set: "town", sunAz: 130, sunEl: 14 }, // gears
   { id: 10, a: 1700, b: 1850, light: "golden", set: "town" },                    // a thousand years of matchmakers
-  { id: 11, a: 1850, b: TOTAL, light: "day", set: "hall", sunAz: 55, sunEl: 55 }, // the cat and the bowl
+  { id: 11, a: 1850, b: TOTAL, light: "day", set: "hall", sunAz: 155, sunEl: 50 }, // the cat and the bowl
 ];
 export const XFADE: Record<number, number> = { 4: 8, 7: 10, 10: 8, 11: 10 };
 export const FLASH_AT = 120;
@@ -144,18 +144,18 @@ const CAMS: Record<number, Key[]> = {
     { f: 440, cut: true, s: (f) => dolly([SX, D + 2.4, 9.8], [SX, D + 2.0, SZ], pushK(f, 440, 0.002, 0.006, 30), { fov: 46 }) },  // 四根柱子 / 八个字
   ],
   4: [
-    { f: 511, s: (f) => dolly([200.9, 1.55, -1.6], [200.15, 1.3, 2.5], pushK(f, 511, 0.0022), { fov: 40 }) },                   // altar + father
+    { f: 511, s: (f) => dolly([200.8, 1.5, -1.9], [200.25, 1.3, 2.5], pushK(f, 511, 0.0022), { fov: 40 }) },                   // altar + father
     { f: 590, cut: true, s: (f) => dolly([199.3, 1.75, -4.2], [198.9, 1.15, 2.2], pushK(f, 590, 0.0018), { fov: 48 }) },          // the household tiptoes
     { f: 642, cut: true, s: (f) => dolly([198.6, 1.95, -0.9], [197.75, 1.95, 2.45], pushK(f, 642, 0.0025, 0.006, 30), { fov: 40, roll: 0.03 }) }, // father vs cat
   ],
   5: [
     { f: 696, s: (f) => dolly([25.1, D + 1.9, 11.4], [24.05, D + 1.5, 16], pushK(f, 696, 0.0022), { fov: 40 }) },                // the teller
     { f: 757, cut: true, s: (f) => zoom([27.2, D + 1.25, 16.6], [PILLAR_X[2], D + 1.1, SZ], 30, pushK(f, 757, 0.0022, 0.006, 30)) }, // 日柱地支
-    { f: 826, cut: true, s: (f) => dolly([24.05, D + 1.55, 13.9], [23.95, D + 0.98, 15.3], pushK(f, 826, 0.0025), { fov: 34 }) },   // the slips, the signs
+    { f: 826, cut: true, s: (f) => dolly([23.97, D + 1.5, 13.75], [23.93, D + 0.98, 15.25], pushK(f, 826, 0.0025), { fov: 36 }) },   // the slips, the signs
   ],
   6: [
     { f: 885, s: (f) => dolly([24.78, D + 1.22, 14.62], [ABACUS[0], ABACUS[1] + 0.02, ABACUS[2]], pushK(f, 885, 0.0025), { fov: 34, roll: -0.03 }) },
-    { f: 935, cut: true, s: (f) => dolly([23.92, D + 1.2, 14.35], [23.92, D + 1.03, 15.25], pushK(f, 935, 0.003), { fov: 32 }) },  // 男属马 女属鼠
+    { f: 935, cut: true, s: (f) => dolly([23.93, D + 1.36, 14.05], [23.93, D + 1.02, 15.25], pushK(f, 935, 0.003), { fov: 38 }) },  // 男属马 女属鼠
     { f: 984, cut: true, s: (f) => dolly([SX, D + 2.6, 9.4], [SX, D + 2.1, SZ], pushK(f, 984, 0.002, 0.007, 24), { fov: 48 }) },   // 子午相冲
   ],
   7: [
@@ -165,22 +165,22 @@ const CAMS: Record<number, Key[]> = {
     { f: EV.goatRat - 6, dur: 22, s: (f) => dolly([SX - 0.6, D + 1.6, 14.6], [SX, D + 1.25, 20.5], pushK(f, EV.goatRat, 0.002), { fov: 44, roll: -0.035 }) },
   ],
   8: [
-    { f: 1195, s: (f) => dolly([SX, D + 10.5, 9.5], [SX, D + 0.6, SZ + 0.6], pushK(f, 1195, 0.0016), { fov: 46 }) },
-    { f: 1325, cut: true, s: (f) => dolly([SX + 1.2, D + 6.2, 12.0], [SX, D + 0.9, SZ], pushK(f, 1325, 0.0022), { fov: 46 }) },
-    { f: EV.chongs - 6, dur: 18, s: rolled((f) => dolly([SX + 1.2, D + 6.2, 12.0], [SX, D + 0.9, SZ], pushK(f, 1325, 0.0022), { fov: 46 }), 0.04) },
-    { f: 1436, cut: true, s: (f) => dolly([SX, D + 4.4, 11.0], [SX, D + 1.6, SZ], pushK(f, 1436, 0.0025), { fov: 50 }) },          // 刑: storm overhead
+    { f: 1195, s: (f) => dolly([SX, D + 9.0, 12.3], [SX, D + 0.6, SZ + 0.3], pushK(f, 1195, 0.0016), { fov: 50 }) },
+    { f: 1325, cut: true, s: (f) => dolly([SX + 0.8, D + 5.6, 13.6], [SX, D + 0.9, SZ], pushK(f, 1325, 0.0022), { fov: 50 }) },
+    { f: EV.chongs - 6, dur: 18, s: rolled((f) => dolly([SX + 0.8, D + 5.6, 13.6], [SX, D + 0.9, SZ], pushK(f, 1325, 0.0022), { fov: 50 }), 0.04) },
+    { f: 1436, cut: true, s: (f) => dolly([SX, D + 3.2, 13.2], [SX, D + 2.2, SZ], pushK(f, 1436, 0.0025), { fov: 54 }) },          // 刑: storm overhead
   ],
   9: [
     { f: 1490, s: (f) => dolly([SX, D + 3.0, 11.0], [SX, D + 3.0, SZ], pushK(f, 1490, 0.0016), { fov: 48 }) },
     { f: 1548, dur: 30, s: (f) => dolly([SX + 1.4, D + 3.1, 13.4], [SX, D + 3.0, SZ], pushK(f, 1563, 0.002), { fov: 44, roll: 0.035 }) },
-    { f: EV.jam - 4, cut: true, s: (f) => dolly([SX + 0.6, D + 3.0, 16.4], [SX, D + 3.0, SZ], pushK(f, EV.jam, 0.0025, 0.006, 30), { fov: 40, roll: -0.035 }) },
+    { f: EV.jam - 4, cut: true, s: (f) => dolly([SX + 0.9, D + 3.1, 13.8], [SX, D + 3.05, SZ], pushK(f, EV.jam, 0.0025, 0.006, 30), { fov: 50, roll: -0.035 }) },
   ],
   10: [
     { f: 1695, s: (f) => dolly([13, 5.2, -1.5], [0, 4.1, 0.4], pushK(f, 1695, 0.0018), { fov: 44 }) },
     { f: 1770, dur: 40, s: (f) => dolly([26, 10.5, -7], [0, 3.8, 2], pushK(f, 1790, 0.0012), { fov: 46 }) },                         // crane out: a thousand years
   ],
   11: [
-    { f: 1845, s: (f) => dolly([199.0, 1.8, -3.0], [198.4, 1.35, 2.4], pushK(f, 1845, 0.0018), { fov: 46 }) },
+    { f: 1845, s: (f) => dolly([198.95, 1.8, -3.0], [198.45, 1.3, 2.4], pushK(f, 1845, 0.0018), { fov: 48 }) },
     { f: 1882, cut: true, s: (f) => dolly([197.95, 2.25, 0.75], [197.45, 2.08, 2.45], pushK(f, 1882, 0.0022), { fov: 38 }) },   // cat + bowl
     { f: 1960, dur: 24, s: (f) => dolly([197.6, 2.2, 1.0], [197.2, 2.15, 2.45], pushK(f, 1972, 0.0025, 0.006, 26), { fov: 36, roll: 0.035 }) }, // 八字不合: the cat looks at us
     { f: EV.push - 4, cut: true, s: (f) => dolly([198.55, 1.35, -1.05], [197.75, 1.1, 2.45], pushK(f, EV.push, 0.0018), { fov: 48 }) }, // the push, the drop

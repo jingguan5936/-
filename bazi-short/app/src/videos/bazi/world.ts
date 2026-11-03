@@ -155,8 +155,9 @@ export class World {
     // the giant slip of the hook and the hero slip of the insert
     const her = slipMats("her", HER);
     this.hookSlip = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.03, 2.4), her.arr); this.hookSlip.castShadow = true; this.hookSlip.receiveShadow = true;
-    const hero = slipMats("hero", HER); this.heroTop = hero.top;
-    this.heroSlip = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.012, 0.93), hero.arr);
+    const hero = slipMats("hero", HER);
+    this.heroTop = new THREE.MeshBasicMaterial({ map: slipTex("her", HER), color: new THREE.Color(1.05, 1.05, 1.05) }) as unknown as THREE.MeshLambertMaterial; // unlit insert: reads red, never in shade
+    this.heroSlip = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.012, 0.93), [hero.red, hero.red, this.heroTop, hero.red, hero.red, hero.red]);
     this.town.add(this.hookSlip, this.heroSlip);
     // ---- the square: four pillars, stall, gears ----
     for (let k = 0; k < 4; k++) {
@@ -181,7 +182,7 @@ export class World {
     SLIPS.forEach((p, i) => { const m = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.006, 0.42), slipsT[i].arr); m.position.set(...p); m.rotation.y = Math.PI + (i ? -0.05 : 0.06); m.receiveShadow = true; this.stall.add(m); });
     this.town.add(this.stall);
     const gg = gearGeo(), gm = lam("gearWood", () => ({ map: woodTex("gear", "#b98552") }));
-    this.gearA = meshOf(gg, gm); this.gearB = meshOf(gg, gm);
+    this.gearA = meshOf(gg, gm); this.gearB = meshOf(gg, lam("gearRed", () => ({ map: woodTex("gearR", "#b0503a") }))); // his (pale wood) and hers (cinnabar)
     const post = new Batch();
     post.add(boxGeo(V(-0.22, 0, 0.55), V(0.22, 6.3, 0.85)), M.wood());
     post.add(boxGeo(V(-1.0, 0, 0.5), V(1.0, 0.3, 0.9)), M.stone());
@@ -334,7 +335,7 @@ export class World {
       this.heroSlip.position.set(0, 5.32 + 0.02 * Math.sin(t * 2), 2.0);
       this.heroSlip.rotation.set(-Math.PI / 2 + 0.08, Math.PI, 0.02 * Math.sin(t * 1.5)); // stood up, top face toward the lens (-z), text upright
       this.heroSlip.scale.set(Math.max(0.02, k), 1, 1);
-      this.heroTop.emissiveIntensity = 1.8 * smooth((f - EV.slipOpen - 6) / 30);
+      (this.heroTop as unknown as THREE.MeshBasicMaterial).color.setScalar(1.05 + 0.75 * smooth((f - EV.slipOpen - 6) / 30)); // gold lights up into the bloom
     }
     // ---- pillars: rise one per word, stems / branches light up, the day branch glows, the clash tilts them ----
     this.pillarRoot.visible = id === 3 || id === 5 || id === 6 || id === 7;
