@@ -1081,12 +1081,12 @@ export const fxHeart = (p: Pen, col = "#e2353c") => {
   p.ell(110, 100, 22, 14, "#ff9aa0", 0, 0, 360, -30);
 };
 /** zig-zag clash bolt along the canvas width (1000 x 200), grows to t */
-export const fxBolt = (p: Pen, t: number, col = "#ffd84a", seed = 1) => {
+export const fxBolt = (p: Pen, t: number, col = "#ffd84a", seed = 1, lw = 13) => {
   const pts: P2[] = [];
   const n = 9;
   for (let i = 0; i <= n; i++) { const x = 20 + (960 * i) / n; if (x > 20 + 960 * t + 1) break; pts.push([x, 100 + (i % 2 ? -1 : 1) * (24 + 14 * rnd(seed, i)) * (i === 0 || i === n ? 0 : 1)]); }
   if (pts.length < 2) return;
-  p.line(pts, col, 13);
+  p.line(pts, col, lw);
 };
 /** jagged crack line (500 x 500), opening with t */
 export const fxCrack = (p: Pen, t: number) => {

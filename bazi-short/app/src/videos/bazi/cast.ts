@@ -361,15 +361,15 @@ const sceneRing = (cam: CamInfo, f: number, t: number, out: Stage) => {
   });
   if (hit) CHONG.forEach(([a, b], n) => {
     const u = q(clamp01((f - EV.chongs - n) / 6), 20);
-    span(out, cam, `boltY${u}${n}`, 1000, 200, (p) => fxBolt(p, u, "#ffd84a", n), waist(a), waist(b), 0.12);
+    span(out, cam, `boltY${u}${n}`, 1000, 200, (p) => fxBolt(p, u, "#ffd84a", n, 8), waist(a), waist(b), 0.1);
   });
   if (harm) HAI.forEach(([a, b], n) => {
     const u = q(clamp01((f - EV.hais - n) / 6), 20);
-    span(out, cam, `boltV${u}${n}`, 1000, 200, (p) => fxBolt(p, u, "#b48cff", n + 7), waist(a), waist(b), 0.12);
+    span(out, cam, `boltV${u}${n}`, 1000, 200, (p) => fxBolt(p, u, "#b48cff", n + 7, 8), waist(a), waist(b), 0.1);
   });
   if (xing) {
     const k = pop(f, EV.xing - 6, 10), fl = (f - EV.xing) % 14 < 3 ? 1 : 0;
-    out.fx.push({ key: `storm${fl}`, cw: 600, ch: 400, draw: (p) => fxStorm(p, fl), x: SQ[0], y: D0 + 4.3, z: SQ[2], w: 6.2 * k, h: 4.1 * k });
+    out.fx.push({ key: `storm${fl}`, cw: 600, ch: 400, draw: (p) => fxStorm(p, fl), x: SQ[0], y: D0 + 5.0, z: SQ[2] + 0.5, w: 4.6 * k, h: 3.05 * k });
   }
 };
 const sceneGears = (cam: CamInfo, f: number, out: Stage) => {

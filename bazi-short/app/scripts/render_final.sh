@@ -3,7 +3,7 @@
 # skipped when complete, then H.264 CRF 16 + the mix (48 kHz -> AAC 320k), mux -map 0:v:0 -map 1:a:0.
 set -e
 cd "$(dirname "$0")/.."
-SCALE=${SCALE:-1}; CONC=${CONC:-4}; TOTAL=2110; CH=211
+SCALE=${SCALE:-1}; CONC=${CONC:-4}; TOTAL=2110; CH=422
 mkdir -p out/final/frames
 for ((a=0; a<TOTAL; a+=CH)); do
   b=$((a+CH-1)); [ $b -ge $TOTAL ] && b=$((TOTAL-1))

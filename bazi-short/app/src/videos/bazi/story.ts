@@ -75,7 +75,7 @@ export const SHOTS: ShotDef[] = [
   { id: 6, a: 885, b: 1022, light: "day", set: "town", sunAz: 145, sunEl: 45 },              // abacus, horse vs rat, the clash
   { id: 7, a: 1022, b: 1200, light: "golden", set: "town", sunAz: 135, sunEl: 14 },                     // the rhyme
   { id: 8, a: 1200, b: 1495, light: "golden", set: "town", sunAz: 140, sunEl: 16 }, // zodiac ring
-  { id: 9, a: 1495, b: 1700, light: "golden", set: "town", sunAz: 130, sunEl: 14 }, // gears
+  { id: 9, a: 1495, b: 1700, light: "golden", set: "town", sunAz: 130, sunEl: 26 }, // gears
   { id: 10, a: 1700, b: 1850, light: "golden", set: "town" },                    // a thousand years of matchmakers
   { id: 11, a: 1850, b: TOTAL, light: "day", set: "hall", sunAz: 155, sunEl: 50 }, // the cat and the bowl
 ];

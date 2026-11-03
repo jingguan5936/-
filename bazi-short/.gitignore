@@ -4,3 +4,4 @@ audio/__pycache__/
 app/remotion-tmp/
 app/out/
 app/node_modules/
+app/npm-install.log
