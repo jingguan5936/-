@@ -634,7 +634,7 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
   p.inkRing(hp, ow, thick);
   hatOn(p, o, hp, H, 300, hc, light, seed, facing, false);
   const brim = !!o.hat && o.hat !== "hair" && o.hat !== "bonnet" && o.hat !== "cap" && o.hat !== "skullcap" && o.hat !== "bun";
-  if (o.beard) { const bx = 300 + 8 * u * facing; p.poly([[bx - 7 * u, hc + 27 * u], [bx + 7 * u, hc + 27 * u], [bx + 2 * u, hc + 66 * u], [bx - 1 * u, hc + 68 * u]], o.beard, 2 * u); }
+  if (o.beard) { const bx = 300 + 8 * u * facing; p.poly([[bx - 13 * u, hc + 27 * u], [bx + 13 * u, hc + 27 * u], [bx + 9 * u, hc + 48 * u], [bx + 2 * u, hc + 58 * u], [bx - 5 * u, hc + 50 * u]], o.beard, 2.4 * u); }
   faceFront(p, 300, hc, W, expr, facing, look, lid, brim, skin, o.moustache, o.build === "stout");
   if (o.glasses) {
     const fx = 300 + 7 * u * facing;
@@ -977,13 +977,13 @@ const animalHead = (p: Pen, k: Animal, H: Blob, cx: number, hc: number, light: n
   if (k === "rabbit") for (const s of [-1, 1]) ear(s, 0.11 * W, 0.62 * HH, 8);
   if (k === "horse") { for (const s of [-1, 1]) ear(s, 0.08 * W, 0.34 * HH, 14, "#d9cfc0", -0.04 * HH); p.ell(cx + 0.36 * W, hc - 0.1 * HH, 0.12 * W, 0.34 * HH, "#6d6a78", ow, 0, 360, 10); }
   if (k === "ox") { for (const s of [-1, 1]) { horn(s, "#efe2c0", 0); p.ell(cx + s * 0.5 * W, hc - 0.18 * HH, 0.13 * W, 0.07 * HH, fur, ow, 0, 360, s * 20); } }
-  if (k === "goat") for (const s of [-1, 1]) horn(s, "#a8875f", 1);
+  if (k === "goat") for (const s of [-1, 1]) { const gx = cx + s * 0.47 * W, gy = crown + 0.3 * HH; p.ell(gx, gy, 0.17 * W, 0.17 * W, "#a8875f", ow); p.arc(gx, gy, 0.09 * W, 0.09 * W, 0, 300, 3 * u); }
   if (k === "dragon") { for (const s of [-1, 1]) { horn(s, "#e8c45a", 0.3); p.line([[cx + s * 0.45 * W, crown + 0.02 * HH], [cx + s * 0.62 * W, crown - 0.06 * HH]], "#e8c45a", 5 * u); } }
   if (k === "tiger" || k === "monkey") for (const s of [-1, 1]) p.ell(cx + s * (k === "monkey" ? 0.5 : 0.36) * W, k === "monkey" ? hc - 0.02 * HH : crown + 0.12 * HH, 0.13 * W, 0.13 * W, fur, ow), p.ell(cx + s * (k === "monkey" ? 0.5 : 0.36) * W, k === "monkey" ? hc - 0.02 * HH : crown + 0.13 * HH, 0.07 * W, 0.07 * W, k === "monkey" ? "#f2cfa6" : "#2b2228", 0);
   if (k === "pig") for (const s of [-1, 1]) p.poly([[cx + s * 0.2 * W, crown + 0.1 * HH], [cx + s * 0.44 * W, crown - 0.06 * HH], [cx + s * 0.42 * W, crown + 0.2 * HH]], fur, ow);
   if (k === "rooster") for (let i = -1; i <= 1; i++) p.ell(cx + i * 0.11 * W, crown - 0.02 * HH - (i === 0 ? 0.05 * HH : 0), 0.08 * W, 0.11 * HH, "#d8343a", ow);
   // ---- head ----
-  const hp = blobPts(cx, hc, k === "snake" ? { ...H, b: H.b * 0.92 } : H);
+  const hp = blobPts(cx, hc, k === "snake" ? { ...H, b: H.b * 0.92 } : k === "horse" ? { ...H, b: H.b * 1.18, egg: -0.22 } : H);
   p.shadedFill(hp, fur, mul(fur, SH_SKIN), light, H.a);
   p.clip(hp, () => {
     if (k === "tiger") for (const [x, w] of [[0, 1], [-0.22, 0.8], [0.22, 0.8]] as const) p.poly([[cx + x * W - 4 * u * w, crown], [cx + x * W + 4 * u * w, crown], [cx + x * W, crown + 0.22 * HH]], "#2b2228", 0);
@@ -995,10 +995,10 @@ const animalHead = (p: Pen, k: Animal, H: Blob, cx: number, hc: number, light: n
   if (k === "dog") for (const s of [-1, 1]) p.ell(cx + s * 0.47 * W, hc - 0.1 * HH, 0.13 * W, 0.27 * HH, "#9a6a3c", ow, 0, 360, s * -12);
   // muzzle / beak / snout, then the shared face (eyes + mouth)
   const mx = cx + 8 * u * facing, mz = MUZ[k];
-  if (k === "horse") { p.ell(mx, hc + 0.3 * HH, 0.27 * W, 0.27 * HH, mz!, 2.4 * u); p.poly([[cx - 0.2 * W, crown + 0.02 * HH], [cx + 0.16 * W, crown], [cx + 0.06 * W, crown + 0.2 * HH], [cx - 0.04 * W, crown + 0.12 * HH], [cx - 0.14 * W, crown + 0.22 * HH]], "#6d6a78", 2.4 * u); }
+  if (k === "horse") { p.ell(mx, hc + 0.38 * HH, 0.25 * W, 0.24 * HH, mz!, 2.4 * u); p.poly([[cx - 0.2 * W, crown + 0.02 * HH], [cx + 0.16 * W, crown], [cx + 0.06 * W, crown + 0.2 * HH], [cx - 0.04 * W, crown + 0.12 * HH], [cx - 0.14 * W, crown + 0.22 * HH]], "#6d6a78", 2.4 * u); }
   else if (mz) p.ell(mx, hc + 0.2 * HH, (k === "ox" ? 0.3 : 0.24) * W, 0.16 * HH, mz, 2.4 * u);
   if (k === "pig") { p.ell(mx, hc + 0.18 * HH, 0.16 * W, 0.11 * HH, "#f7a9a5", 3 * u); for (const s of [-1, 1]) p.ell(mx + s * 5 * u, hc + 0.18 * HH, 2.2 * u, 3.4 * u, INK, 0); }
-  if (k === "ox" || k === "horse") for (const s of [-1, 1]) p.ell(mx + s * 9 * u, hc + (k === "horse" ? 0.36 : 0.16) * HH, 2.4 * u, 3.4 * u, INK, 0);
+  if (k === "ox" || k === "horse") for (const s of [-1, 1]) p.ell(mx + s * 9 * u, hc + (k === "horse" ? 0.45 : 0.16) * HH, 2.4 * u, 3.4 * u, INK, 0);
   if (k === "ox") p.arc(mx, hc + 0.27 * HH, 8 * u, 6 * u, 20, 160, 3 * u, "#e8c45a");
   if (k === "rat" || k === "dog" || k === "tiger" || k === "rabbit") p.ell(mx, hc + 0.12 * HH, 5 * u, 3.6 * u, k === "rat" || k === "rabbit" ? "#e88a96" : INK, 1.5 * u);
   if (k === "rat" || k === "tiger" || k === "dragon") for (const s of [-1, 1]) for (const dy of [-3, 3]) p.stroke([[mx + s * 12 * u, hc + 0.16 * HH + dy * u], [mx + s * 34 * u, hc + 0.13 * HH + dy * 2 * u]], 1.6 * u);
@@ -1011,8 +1011,8 @@ const animalHead = (p: Pen, k: Animal, H: Blob, cx: number, hc: number, light: n
 
 /** zodiac townsfolk: animal head + plain Qing jacket/robe colours per sign */
 const ZCOAT: Record<Animal, [string, string]> = {
-  rat: ["#5d6f9a", "#3b3f52"], ox: ["#4f7a5a", "#3b3f52"], tiger: ["#b5553f", "#3b3f52"], rabbit: ["#c25a7a", "#5a4a6a"], dragon: ["#2f6a63", "#3b3f52"],
-  snake: ["#7a5ac9", "#3b3f52"], horse: ["#3f6fb5", "#2e3550"], goat: ["#c9a24e", "#5a4632"], monkey: ["#d9733a", "#3b3f52"], rooster: ["#b8304a", "#3b3f52"],
+  rat: ["#5d6f9a", "#3b3f52"], ox: ["#4f7a5a", "#3b3f52"], tiger: ["#b5553f", "#3b3f52"], rabbit: ["#c25a7a", "#5a4a6a"], dragon: ["#2f6a63", "#3b3f52"], // horse: white robe (白马)
+  snake: ["#7a5ac9", "#3b3f52"], horse: ["#ece7dc", "#8a8478"], goat: ["#c9a24e", "#5a4632"], monkey: ["#d9733a", "#3b3f52"], rooster: ["#b8304a", "#3b3f52"],
   dog: ["#5a8f6a", "#3b3f52"], pig: ["#d48aa8", "#5a4a6a"],
 };
 export const zodiacOutfit = (k: Animal): Outfit => ({ jacket: ZCOAT[k][0], pants: ZCOAT[k][1], boots: "#2b2228", animal: k, dress: mix(ZCOAT[k][0], "#2b2228", 0.35) });
@@ -1021,7 +1021,7 @@ export const zodiacOutfit = (k: Animal): Outfit => ({ jacket: ZCOAT[k][0], pants
 export const MATCHMAKER: Outfit = { jacket: "#c23a5a", pants: "#3b3f52", boots: "#2b2228", hat: "bun", hair: "#2b2228", flower: "#e2353c", dress: "#6a3f8f", build: "stout", skin: "#f7d2b0" };
 export const FATHER: Outfit = { jacket: "#2e3550", pants: "#3b3f52", boots: "#2b2228", hat: "skullcap", dress: "#5b7bb0", moustache: "#2b2228" };
 export const MOTHER: Outfit = { jacket: "#3f8f7a", pants: "#3b3f52", boots: "#2b2228", hat: "bun", hair: "#2b2228", dress: "#a8506a", skin: "#ffe0c4" };
-export const TELLER: Outfit = { jacket: "#5a5560", pants: "#3b3f52", boots: "#2b2228", hat: "skullcap", dress: "#8a8f9a", glasses: true, beard: "#d9d6dc", moustache: "#d9d6dc", skin: "#f5d3b5" };
+export const TELLER: Outfit = { jacket: "#5a5560", pants: "#3b3f52", boots: "#2b2228", hat: "skullcap", dress: "#8a8f9a", glasses: true, beard: "#a9a4b6", moustache: "#a9a4b6", skin: "#f5d3b5" };
 export const GROOM: Outfit = { jacket: "#2f5f6a", pants: "#3b3f52", boots: "#2b2228", hat: "skullcap", dress: "#4b8fc2", build: "adult" };
 export const BRIDE: Outfit = { jacket: "#e2789a", pants: "#3b3f52", boots: "#2b2228", hat: "bun", hair: "#2b2228", dress: "#d8424a", skin: "#ffe2c8" };
 export const DYNASTY: Outfit[] = [
@@ -1097,7 +1097,7 @@ export const fxCrack = (p: Pen, t: number) => {
 /** dark storm cloud with rain streaks (600 x 400), lightning flicker on k */
 export const fxStorm = (p: Pen, flash: number) => {
   for (const [x, y, r] of [[170, 150, 90], [280, 110, 115], [400, 140, 100], [480, 180, 70], [300, 190, 120]] as const) p.ell(x, y, r, r * 0.75, "#6a6480", 10);
-  p.ell(300, 215, 240, 50, "#6a6480", 10);
+  for (const [x, r] of [[160, 60], [250, 70], [350, 66], [440, 56]] as const) p.ell(x, 215, r, r * 0.7, "#6a6480", 10);
   for (let i = 0; i < 9; i++) p.stroke([[110 + i * 45, 270], [95 + i * 45, 330 + (i % 3) * 22]], 7, "#7d8aa8");
   if (flash > 0.5) p.line([[300, 230], [270, 300], [310, 300], [262, 392]], "#fff3b0", 16);
 };

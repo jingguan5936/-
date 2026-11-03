@@ -237,7 +237,7 @@ export class World {
     // ---- light rig ----
     const K = LOOK[s.light], sunDir = this.shotSun(id, s, L);
     this.hemi.color.set(L.sky); this.hemi.groundColor.set(L.ground); this.hemi.intensity = L.hemiI;
-    this.sun.color.set(L.sunCol); this.sun.intensity = L.sunI;
+    this.sun.color.set(L.sunCol); this.sun.intensity = L.sunI * (id === 8 && f >= EV.xing - 2 ? 0.45 : 1); // the storm dims the sun
     let Rr = THREE.MathUtils.clamp(dist * 1.15 + 5, 6, 70);
     if (s.light === "golden") Rr = Math.max(Rr, 22);
     this.sun.position.copy(focus).addScaledVector(sunDir, 160); this.sun.target.position.copy(focus);
@@ -307,6 +307,7 @@ export class World {
       if (p.flat) e2.mesh.rotation.set(-Math.PI / 2, 0, p.rot ?? 0);
       else { e2.mesh.quaternion.copy(cam.quaternion); e2.mesh.rotateZ(p.rot ?? 0); }
       e2.mesh.scale.set(p.w, p.h, 1);
+      e2.mat.color.setScalar(p.key.startsWith("bolt") ? 2.4 : 1); // clash bolts glow into the bloom
       fused.push(e2);
     }
     for (let i = fi; i < this.fxs.length; i++) this.fxs[i].mesh.visible = false;
@@ -322,11 +323,12 @@ export class World {
     // ---- hook: the giant slip falls onto the bridge crown on "否" ----
     this.hookSlip.visible = id === 1 && f >= EV.slipFall;
     if (this.hookSlip.visible) {
-      const u = clamp01((f - EV.slipFall) / (EV.slipLand - EV.slipFall)), fall = u * u, yLand = deckY(0) + 0.03;
-      const flutter = (1 - u) * 0.9;
-      this.hookSlip.position.set(0.15 + 1.6 * Math.sin(u * 5.0) * (1 - u), yLand + 22 * (1 - fall), 0.2 + 0.8 * Math.cos(u * 4.0) * (1 - u));
-      this.hookSlip.rotation.set(flutter * Math.sin(u * 9), Math.PI + 0.2 + 2.4 * (1 - u), flutter * Math.cos(u * 7));
-      if (f >= EV.slipLand) { this.hookSlip.position.set(0.15, yLand, 0.2); this.hookSlip.rotation.set(0, Math.PI + 0.2, 0); }
+      // it drops edge-first and slams upright on the crown: a red wall between the two (face to the lens, text upright)
+      const u = clamp01((f - EV.slipFall) / (EV.slipLand - EV.slipFall)), fall = u * u, yLand = deckY(0) + 1.17;
+      const flutter = (1 - u) * 0.8;
+      this.hookSlip.position.set(0.1 + 1.4 * Math.sin(u * 5.0) * (1 - u), yLand + 22 * (1 - fall), -0.2 + 0.8 * Math.cos(u * 4.0) * (1 - u));
+      this.hookSlip.rotation.set(-Math.PI / 2 + flutter * Math.sin(u * 9), Math.PI + 2.2 * (1 - u), flutter * Math.cos(u * 7));
+      if (f >= EV.slipLand) { const w = 0.05 * Math.exp(-(f - EV.slipLand) / 4) * Math.cos((f - EV.slipLand) * 1.6); this.hookSlip.position.set(0.1, yLand, -0.2); this.hookSlip.rotation.set(-Math.PI / 2 + w, Math.PI, 0); }
     }
     // ---- insert: the slip opens (unfolds) and its eight characters light up ----
     this.heroSlip.visible = id === 2 && f >= EV.slipOpen - 1;
@@ -372,9 +374,9 @@ export class World {
       const fj = Math.min(f, EV.jam), rate = (ff: number) => 0.25 + 0.85 * smooth((ff - EV.mesh) / 20);
       let th = 0; for (let ff = 1495; ff < fj; ff++) th += rate(ff) / FPS;
       const jam = smooth((f - EV.jam) / 6);
-      const shake = [EV.jam + 8, EV.ka1, EV.ka2].reduce((a, f0) => { const n = f - f0; return n >= 0 && n < 7 ? a + 0.035 * (n % 2 ? -1 : 1) * (1 - n / 7) : a; }, 0);
+      const shake = [EV.jam + 8, EV.ka1, EV.ka2].reduce((a, f0) => { const n = f - f0; return n >= 0 && n < 7 ? a + 0.07 * (n % 2 ? -1 : 1) * (1 - n / 7) : a; }, 0);
       this.gearA.position.set(0, 1.6, 0); this.gearA.rotation.set(0, 0, th + shake);
-      this.gearB.position.set(0, 1.6 + 2.9 + 0.2 * jam, 0); this.gearB.rotation.set(0, 0, -th + Math.PI / 12 * (1 - jam) - shake);
+      this.gearB.position.set(0, 1.6 + 2.9 + 0.1 * jam, 0); this.gearB.rotation.set(0, 0, -th + Math.PI / 12 * (1 - jam) - shake);
     }
     // ---- hall: the slip on the altar, incense smoke, the bowl ----
     this.altarSlip.visible = (id === 4 && f >= EV.place + 4) || id === 11;
@@ -385,7 +387,7 @@ export class World {
     }
     let bx = BOWL0[0], by = BOWL0[1], rz = 0, vis = true;
     if (id === 11 && f >= EV.push) {
-      bx += 0.34 * smooth((f - EV.push) / (BOWL_TIP - EV.push));
+      bx += 0.47 * smooth((f - EV.push) / (BOWL_TIP - EV.push));
       if (f >= BOWL_TIP) {
         const tt = (f - BOWL_TIP) / FPS, T0 = (BOWL_HIT - BOWL_TIP) / FPS;
         by = BOWL0[1] - (BOWL0[1] - 0.0) * Math.min(1, (tt / T0) ** 2); bx += 0.35 * Math.min(tt, T0); rz = -4.2 * Math.min(tt, T0);

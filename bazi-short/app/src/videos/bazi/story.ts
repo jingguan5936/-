@@ -30,10 +30,10 @@ export const RM: V3 = [200, 0, 0];
 export const ALTAR: V3 = [200, 0, 2.62];
 export const CUP = { x0: 196.4, x1: 198.0, top: 1.9, z: 2.48 };
 export const CAT_AT: V3 = [197.15, CUP.top, 2.5];
-export const BOWL0: V3 = [197.72, CUP.top, 2.45];
+export const BOWL0: V3 = [197.56, CUP.top, 2.45];
 /** zodiac ring around the square centre (子 at the far side, clockwise seen from above) */
 export const RING_R = 3.6;
-export const ringPos = (i: number): V3 => { const a = Math.PI / 2 - (i * Math.PI) / 6 + Math.PI / 12; return [SQ[0] + RING_R * 0.72 * Math.cos(a), D0, SQ[2] + RING_R * Math.sin(a)]; }; // oval, long axis along the view (vertical frame)
+export const ringPos = (i: number): V3 => { const a = Math.PI / 2 - (i * Math.PI) / 6 + Math.PI / 12; return [SQ[0] + RING_R * 0.6 * Math.cos(a), D0, SQ[2] + RING_R * Math.sin(a)]; }; // oval, long axis along the view (vertical frame)
 export const LIUHE: [number, number][] = [[0, 1], [2, 11], [3, 10], [4, 9], [5, 8], [6, 7]];
 export const CHONG: [number, number][] = [[0, 6], [1, 7], [2, 8], [3, 9], [4, 10], [5, 11]];
 export const HAI: [number, number][] = [[0, 7], [1, 6], [2, 5], [3, 4], [8, 11], [9, 10]];
@@ -128,8 +128,8 @@ const [SX, , SZ] = SQ;
 const CAMS: Record<number, Key[]> = {
   1: [
     { f: 0, s: (f) => dolly([6.5, 10.5, -22], [0, 2.8, 1.5], pushK(f, 0, 0.0025), { fov: 46 }) },
-    { f: 52, dur: 30, s: (f) => dolly([4.2, 8.2, -15.5], [0, 3.6, 0], pushK(f, 52, 0.003), { fov: 44, roll: -0.04 }) }, // centred on "婚事"
-    { f: EV.slipLand - 1, dur: 18, s: (f) => dolly([3.6, 7.6, -13.5], [0, 3.8, 0], pushK(f, EV.slipLand, 0.0035), { fov: 42, roll: 0.035 }) },
+    { f: 50, cut: true, s: (f) => dolly([1.35, 5.0, -8.6], [0, 4.5, 0.4], pushK(f, 50, 0.003), { fov: 44, roll: -0.03 }) }, // deck-level MS: the groom, the bride up the far slope
+    { f: EV.slipLand - 1, dur: 16, s: (f) => dolly([1.2, 5.0, -8.0], [0, 4.7, 0.4], pushK(f, EV.slipLand, 0.0035), { fov: 44, roll: 0.035 }) },
   ],
   2: [
     { f: 120, s: (f) => zoom([-26, 3.6, -1.2], [4, 2.6, 1.0], 46, pushK(f, 120, 0.0016)) },                                     // 清朝，江南小镇
@@ -141,7 +141,7 @@ const CAMS: Record<number, Key[]> = {
     { f: 332, s: (f) => dolly([SX + 1.2, D + 2.1, 8.5], [SX, D + 2.0, SZ], pushK(f, 332, 0.0018), { fov: 50 }) },
     { f: EV.stems - 12, dur: 28, s: (f) => dolly([SX - 2.4, D + 2.6, 12.6], [SX - 0.8, D + 2.75, SZ], pushK(f, EV.stems, 0.0022), { fov: 38, roll: 0.035 }) },
     { f: EV.branches - 10, dur: 24, s: (f) => dolly([SX + 2.6, D + 1.1, 12.8], [SX + 0.8, D + 1.05, SZ], pushK(f, EV.branches, 0.0022), { fov: 38, roll: -0.035 }) },
-    { f: 440, cut: true, s: (f) => dolly([SX, D + 2.4, 9.8], [SX, D + 2.0, SZ], pushK(f, 440, 0.002, 0.006, 30), { fov: 46 }) },  // 四根柱子 / 八个字
+    { f: 440, cut: true, s: (f) => dolly([SX, D + 2.4, 8.8], [SX, D + 2.0, SZ], pushK(f, 440, 0.002, 0.006, 30), { fov: 50 }) },  // 四根柱子 / 八个字
   ],
   4: [
     { f: 511, s: (f) => dolly([200.8, 1.5, -1.9], [200.25, 1.3, 2.5], pushK(f, 511, 0.0022), { fov: 40 }) },                   // altar + father
@@ -155,8 +155,8 @@ const CAMS: Record<number, Key[]> = {
   ],
   6: [
     { f: 885, s: (f) => dolly([24.78, D + 1.22, 14.62], [ABACUS[0], ABACUS[1] + 0.02, ABACUS[2]], pushK(f, 885, 0.0025), { fov: 34, roll: -0.03 }) },
-    { f: 935, cut: true, s: (f) => dolly([23.93, D + 1.36, 14.05], [23.93, D + 1.02, 15.25], pushK(f, 935, 0.003), { fov: 38 }) },  // 男属马 女属鼠
-    { f: 984, cut: true, s: (f) => dolly([SX, D + 2.6, 9.4], [SX, D + 2.1, SZ], pushK(f, 984, 0.002, 0.007, 24), { fov: 48 }) },   // 子午相冲
+    { f: 935, cut: true, s: (f) => dolly([23.93, D + 1.22, 14.2], [23.93, D + 1.0, 15.25], pushK(f, 935, 0.003), { fov: 38 }) },  // 男属马 女属鼠
+    { f: 984, cut: true, s: (f) => dolly([SX + 0.4, D + 2.6, 9.0], [SX + 0.2, D + 2.1, SZ], pushK(f, 984, 0.002, 0.007, 24), { fov: 50 }) },   // 子午相冲
   ],
   7: [
     { f: 1017, s: (f) => dolly([SX + 0.4, D + 1.75, 12.6], [SX, D + 1.25, 19], pushK(f, 1017, 0.002), { fov: 44 }) },             // 躲过相冲
@@ -176,14 +176,14 @@ const CAMS: Record<number, Key[]> = {
     { f: EV.jam - 4, cut: true, s: (f) => dolly([SX + 0.9, D + 3.1, 13.8], [SX, D + 3.05, SZ], pushK(f, EV.jam, 0.0025, 0.006, 30), { fov: 50, roll: -0.035 }) },
   ],
   10: [
-    { f: 1695, s: (f) => dolly([13, 5.2, -1.5], [0, 4.1, 0.4], pushK(f, 1695, 0.0018), { fov: 44 }) },
+    { f: 1695, s: (f) => dolly([8.6, 4.9, -0.6], [0, 4.5, 0.6], pushK(f, 1695, 0.0018), { fov: 40 }) },
     { f: 1770, dur: 40, s: (f) => dolly([26, 10.5, -7], [0, 3.8, 2], pushK(f, 1790, 0.0012), { fov: 46 }) },                         // crane out: a thousand years
   ],
   11: [
     { f: 1845, s: (f) => dolly([198.95, 1.8, -3.0], [198.45, 1.3, 2.4], pushK(f, 1845, 0.0018), { fov: 48 }) },
-    { f: 1882, cut: true, s: (f) => dolly([197.95, 2.25, 0.75], [197.45, 2.08, 2.45], pushK(f, 1882, 0.0022), { fov: 38 }) },   // cat + bowl
-    { f: 1960, dur: 24, s: (f) => dolly([197.6, 2.2, 1.0], [197.2, 2.15, 2.45], pushK(f, 1972, 0.0025, 0.006, 26), { fov: 36, roll: 0.035 }) }, // 八字不合: the cat looks at us
-    { f: EV.push - 4, cut: true, s: (f) => dolly([198.55, 1.35, -1.05], [197.75, 1.1, 2.45], pushK(f, EV.push, 0.0018), { fov: 48 }) }, // the push, the drop
+    { f: 1882, cut: true, s: (f) => dolly([197.45, 2.15, 0.05], [197.35, 1.95, 2.45], pushK(f, 1882, 0.0022), { fov: 40 }) },   // cat + bowl
+    { f: 1960, dur: 24, s: (f) => dolly([197.3, 2.15, 0.7], [197.25, 2.05, 2.45], pushK(f, 1972, 0.0025, 0.006, 26), { fov: 38, roll: 0.035 }) }, // 八字不合: the cat looks at us
+    { f: EV.push - 4, cut: true, s: (f) => dolly([198.3, 1.25, 0.1], [197.85, 1.0, 2.45], pushK(f, EV.push, 0.0018), { fov: 48 }) }, // the push, the drop
   ],
 };
 

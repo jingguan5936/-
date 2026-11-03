@@ -250,9 +250,9 @@ const zodiac = (cam: CamInfo, out: Stage, k: Animal, i: number, x: number, y: nu
 
 const sceneHook = (cam: CamInfo, f: number, t: number, out: Stage) => {
   const shock = f >= EV.slipLand;
-  front(cam, W(1, GROOM, "groom"), 0.55, deckY(-8.6), -8.6, { mode: "stand", expr: shock ? "shock" : "neutral", look: shock ? 0 : -1, blink: lidAt(t, 1), seed: 3 }, 1, out);
-  front(cam, W(2, BRIDE, "bride"), -0.55, deckY(8.8), 8.8, { mode: "stand", expr: shock ? "shock" : "smile_closed", look: 0, blink: lidAt(t, 2), seed: 4 }, 1, out);
-  dust(out, f, EV.slipLand, 14, 0, deckY(0) + 0.5, 0, 3.4, "235,225,205");
+  front(cam, W(1, GROOM, "groom"), 0.45, deckY(-4.8), -4.8, { mode: "stand", expr: shock ? "shock" : "neutral", look: shock ? 0 : -1, blink: lidAt(t, 1), seed: 3 }, 1, out);
+  front(cam, W(2, BRIDE, "bride"), -0.4, deckY(3.8), 3.8, { mode: "stand", expr: shock ? "shock" : "smile_closed", look: 0, blink: lidAt(t, 2), seed: 4 }, 1, out);
+  dust(out, f, EV.slipLand, 14, 0, deckY(0) + 0.3, -0.3, 3.0, "235,225,205");
 };
 const sceneMatchmaker = (cam: CamInfo, f: number, t: number, out: Stage) => {
   if (f >= EV.slipOpen) return;
@@ -263,7 +263,7 @@ const sceneMatchmaker = (cam: CamInfo, f: number, t: number, out: Stage) => {
 const sceneHall = (id: number, cam: CamInfo, f: number, t: number, out: Stage) => {
   if (id === 4) {
     const placed = f >= EV.place, bowK = smooth((f - EV.bow) / 6) * (1 - smooth((f - EV.bow - 26) / 8));
-    if (f < 590) front(cam, W(10, FATHER, "father"), 200.6, 0, 1.85, { mode: "stand", facing: -1, expr: "stern", prop: placed ? null : "slip", tilt: -14 * bowK, blink: lidAt(t, 10), seed: 8 }, 1, out);
+    if (f < 590) front(cam, W(10, FATHER, "father"), 200.6, 0, 1.85, { mode: "stand", facing: -1, expr: "stern", prop: placed ? null : "slip", tilt: -24 * bowK, headTilt: -10 * bowK, blink: lidAt(t, 10), seed: 8 }, 1, out);
     else if (f < 642) {
       front(cam, W(10, FATHER, "father"), 200.1, 0, 0.9, { mode: "stand", expr: "nervous", look: 1, blink: lidAt(t, 10), seed: 8 }, 1, out);
       const xm = 199.6 + 0.55 * clamp01((f - 590) / 50), ph = q((((f - 590) / FPS) * 1.4) % 1, 60);
@@ -352,7 +352,7 @@ const sceneRing = (cam: CamInfo, f: number, t: number, out: Stage) => {
     const expr: Expr = xing ? (i % 2 ? "dazed" : "pained") : harm ? (i % 3 ? "nervous" : "shock") : hit ? "shock" : f >= EV.liuhe ? (i % 2 ? "grin" : "smile_closed") : "smile";
     zodiac(cam, out, k, i, x, y, z, t, { mode: "stand", expr, look: hit && !xing ? (i % 2 ? 1 : -1) : 0 });
   });
-  const waist = (i: number): V3 => { const [x, y, z] = ringPos(i); return [x, y + 1.15, z]; };
+  const waist = (i: number): V3 => { const [x, y, z] = ringPos(i); return [x, y + 0.55, z]; };
   if (f >= EV.liuhe && f < EV.bad) LIUHE.forEach(([a, b], n) => {
     const u = q(clamp01((f - EV.liuhe - n * 3) / 12), 20);
     if (u > 0) span(out, cam, `thread${u}`, 1000, 200, (p) => { const pts: [number, number][] = []; for (let i = 0; i <= 20 * u; i++) { const s = i / 20; pts.push([20 + 960 * s, 70 + 70 * Math.sin(Math.PI * s)]); } if (pts.length > 1) p.line(pts, "#e2353c", 8); }, waist(a), waist(b), 0.12);
@@ -375,7 +375,8 @@ const sceneRing = (cam: CamInfo, f: number, t: number, out: Stage) => {
 const sceneGears = (cam: CamInfo, f: number, out: Stage) => {
   const mesh: V3 = [SQ[0], D0 + 3.05, SQ[2] - 0.3];
   burst(out, f, EV.he, 10, mesh[0], mesh[1], mesh[2] - 0.3, 1.6, "#ffe9a0");
-  dust(out, f, EV.jam + 6, 16, mesh[0] - 0.4, mesh[1], mesh[2] - 0.4, 1.6);
+  dust(out, f, EV.jam + 6, 16, mesh[0] - 0.4, mesh[1], mesh[2] - 0.4, 2.4);
+  burst(out, f, EV.jam + 6, 8, mesh[0], mesh[1], mesh[2] - 0.4, 2.0, "#ffffff");
   dust(out, f, EV.ka1, 14, mesh[0] + 0.3, mesh[1] + 0.2, mesh[2] - 0.4, 1.8);
   dust(out, f, EV.ka2, 14, mesh[0] - 0.2, mesh[1] - 0.1, mesh[2] - 0.4, 1.8);
   burst(out, f, EV.ka1, 6, mesh[0], mesh[1], mesh[2] - 0.4, 1.2);

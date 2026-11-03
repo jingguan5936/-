@@ -24,7 +24,7 @@ export const LIGHTS: Record<"day" | "golden", LightPreset> = {
   },
   golden: {
     az: 6, el: 7,
-    lit: [1.5, 0.68, 0.24], shade: [0.15, 0.15, 0.3], lift: [0.04, 0.06, 0.17], lambert: 0.35, sideK: 0.82, term: 0.07,
+    lit: [1.62, 0.98, 0.52], shade: [0.3, 0.27, 0.42], lift: [0.08, 0.08, 0.17], lambert: 0.35, sideK: 0.82, term: 0.07,
     charTint: [1.0, 0.78, 0.56], charShade: 0.88, charGrad: 0.1, bodyGrad: 0.25, sideTint: [0.85, 0.80, 0.95],
     blob: [0.75, 0.74, 0.9], actorShadow: true,
     top: "#6a4f8c", hor: "#ffd08a", skyCurve: [0.05, 0.6, 1.0], fog: "#efb489", fogNear: 50, fogFar: 380, sunDisc: "#ffcf9e",
@@ -49,7 +49,7 @@ export const LOOK: Record<"day" | "golden", WorldLook> = {
     water: { near: "#3f9a8c", mid: "#2f7d7e", far: "#6f9da6", crest: "#a9ddd0", trough: "#1d585a", glint: "#ffffff", shade: [0.5, 0.58, 0.66] }, // jade canal water (bazi)
     cloud: { lit: "#fbf8f1", mid: "#e1e5f3", shade: "#c3cbe9" },
     bounce: [0, 0, 0],
-    sat: 1.08,
+    sat: 1.18,
   },
   golden: {
     // sunset, not dusk: #ffd08a horizon, peach/orange through ~10 deg, warm rose at 20, muted warm mauve only near the top

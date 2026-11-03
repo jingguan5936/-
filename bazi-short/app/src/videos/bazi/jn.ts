@@ -15,7 +15,7 @@ const U = (r: () => number, a: number, b: number) => a + (b - a) * r();
 export const plasterTex = (key: string, wm: number, hm: number, o: { door?: boolean; win?: number; upper?: boolean } = {}) =>
   ctex("plaster_" + key, Math.round(wm * 64), Math.round(hm * 64), (g, r) => {
     const W = Math.round(wm * 64), H = Math.round(hm * 64), px = 64;
-    g.fillStyle = "#efece3"; g.fillRect(0, 0, W, H);
+    g.fillStyle = "#f3ead6"; g.fillRect(0, 0, W, H);
     for (let i = 0; i < 26; i++) { // soft weathering blotches
       const x = U(r, 0, W), y = U(r, 0, H), rad = U(r, 20, 70), gr = g.createRadialGradient(x, y, 0, x, y, rad);
       gr.addColorStop(0, `rgba(150,150,140,${U(r, 0.05, 0.12)})`); gr.addColorStop(1, "rgba(150,150,140,0)");
@@ -75,7 +75,7 @@ export const slabTex = () => ctex("jnSlabs", 1024, 1024, (g, r) => {
     let x = -U(r, 0, 200);
     while (x < 1024) {
       const w = U(r, 180, 320), v = U(r, -14, 14);
-      g.fillStyle = `rgb(${172 + v},${168 + v},${158 + v})`; g.fillRect(x + 3, y + 3, w - 6, rowH - 6);
+      g.fillStyle = `rgb(${186 + v},${170 + v},${146 + v})`; g.fillRect(x + 3, y + 3, w - 6, rowH - 6);
       g.fillStyle = "rgba(255,255,250,0.10)"; g.fillRect(x + 3, y + 3, w - 6, 6);
       for (let k = 0; k < 3; k++) { const cx = x + U(r, 0, w), cy = y + U(r, 0, rowH), rad = U(r, 10, 40), gr = g.createRadialGradient(cx, cy, 0, cx, cy, rad); gr.addColorStop(0, "rgba(90,95,85,0.12)"); gr.addColorStop(1, "rgba(90,95,85,0)"); g.fillStyle = gr; g.fillRect(cx - rad, cy - rad, 2 * rad, 2 * rad); }
       x += w;
@@ -152,10 +152,10 @@ export const M = {
   cap: () => lam("jnCap", () => ({ color: "#42464f" })),
   white: () => lam("jnWhite", () => ({ map: rep(plasterTex("plain", 4, 4, { win: 0 }), 1, 1) })),
   slab: () => lam("jnSlab", () => ({ map: slabTex() })),
-  stone: () => lam("jnStone", () => ({ map: stoneHD("jnStoneHD", ["#b9b6ad", "#aeaba2", "#c3c0b6", "#a5a299"], "#86837b") })),
+  stone: () => lam("jnStone", () => ({ map: stoneHD("jnStoneHD", ["#c4b49a", "#b8a88e", "#cdbfa5", "#b0a088"], "#8c7e68") })),
   cope: () => lam("jnCope", () => ({ color: "#bdb9b0" })),
   wood: () => lam("jnWoodDk", () => ({ map: woodTex("dk", "#5b3524") })),
-  woodRed: () => lam("jnWoodRed", () => ({ map: woodTex("red", "#7a2a22") })),
+  woodRed: () => lam("jnWoodRed", () => ({ map: woodTex("red", "#6c3a2e") })),
   woodLt: () => lam("jnWoodLt", () => ({ map: woodTex("lt", "#b98552") })),
   lacquer: () => lam("jnLacquer", () => ({ color: "#a5432c" })),
   gold: () => lam("jnGold", () => ({ color: "#d9ad48" })),
@@ -239,7 +239,7 @@ export const buildBridge = (b: Batch) => {
   }
   // step edges on the deck (thin dark strips every 0.45 m of rise)
   for (let z = -BRIDGE_HALF + 0.4; z < BRIDGE_HALF - 0.2; z += 0.5)
-    b.add(boxGeo(V(-W / 2 + 0.25, deckY(z) - 0.02, z - 0.03), V(W / 2 - 0.25, deckY(z) + 0.012, z + 0.03)), M.black());
+    b.add(boxGeo(V(-W / 2 + 0.25, deckY(z) - 0.02, z - 0.012), V(W / 2 - 0.25, deckY(z) + 0.008, z + 0.012)), lam("jnStep", () => ({ color: "#6a645c" })));
 };
 export const buildCanal = (b: Batch) => {
   const stone = M.stone();
@@ -393,7 +393,7 @@ export const buildHall = (root: THREE.Object3D, o: [number, number, number]) => 
   for (const [y, n] of [[0.77, 4], [1.37, 3]] as const) for (let i = 0; i < n; i++) for (let k = 0; k < 3; k++)
     b.add(bowl, M.porcelain(), new THREE.Matrix4().makeTranslation(c.x0 + 0.25 + i * 0.36, y + k * 0.05, c.z - 0.05));
   // two armchairs
-  for (const s of [-1, 1]) {
+  for (const s of [1]) { // (the chair on the cupboard side would stand in the falling bowl's path)
     const cx = ax + s * 1.75, cz = az - 0.35;
     b.add(boxGeo(V(cx - 0.3, 0.45, cz - 0.28), V(cx + 0.3, 0.52, cz + 0.28)), M.woodRed());
     b.add(boxGeo(V(cx - 0.3, 0.52, cz + 0.22), V(cx + 0.3, 1.15, cz + 0.28)), M.woodRed());
